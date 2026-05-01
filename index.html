@@ -8,497 +8,261 @@
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Rubik:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --bg-base: #111827;
-  --bg-surface: #1a2236;
-  --bg-card: #1f2a42;
-  --bg-card-hover: #253252;
-  --bg-input: #162032;
-  --bg-elevated: #263354;
-  --olive: #6d9b3a;
-  --olive-light: #8ec44f;
-  --olive-dark: #4a7025;
-  --gold: #d4a843;
-  --gold-dim: #a07e2e;
-  --red: #d94040;
-  --red-dim: rgba(217,64,64,0.15);
-  --blue: #4a90d9;
-  --blue-dim: rgba(74,144,217,0.12);
-  --cyan: #36b5a0;
-  --cyan-dim: rgba(54,181,160,0.12);
-  --purple: #8b6cc1;
-  --text-1: #eaedf3;
-  --text-2: #97a3bc;
-  --text-3: #5c6a84;
-  --border: #2d3a56;
-  --border-light: #384868;
-  --hard-hour-bg: rgba(217,64,64,0.08);
-  --shadow: 0 4px 24px rgba(0,0,0,0.35);
-  --shadow-sm: 0 2px 10px rgba(0,0,0,0.2);
-  --radius: 10px;
-  --radius-sm: 6px;
+  --bg-base:#0f1520;
+  --bg-card:#1b2336;
+  --bg-card2:#212d45;
+  --bg-input:#151d2e;
+  --bg-elevated:#283450;
+  --olive:#6d9b3a;
+  --olive-lt:#8ec44f;
+  --gold:#d4a843;
+  --red:#d94040;
+  --red-dim:rgba(217,64,64,.14);
+  --blue:#4a90d9;
+  --blue-dim:rgba(74,144,217,.12);
+  --cyan:#36b5a0;
+  --text-1:#eaedf3;
+  --text-2:#97a3bc;
+  --text-3:#5c6a84;
+  --border:#2b3754;
+  --brd-lt:#3a4e6e;
+  --shadow:0 4px 22px rgba(0,0,0,.35);
+  --r:10px;
+  --rs:6px;
 }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Heebo',sans-serif;background:var(--bg-base);color:var(--text-1);min-height:100vh}
 
-* { margin:0; padding:0; box-sizing:border-box; }
+/* === HEADER === */
+.hdr{background:linear-gradient(135deg,#1a2236,#141c2e);border-bottom:3px solid var(--olive);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:var(--shadow)}
+.hdr-r{display:flex;align-items:center;gap:12px}
+.emb{width:48px;height:48px;border-radius:50%;border:2px solid var(--olive);display:flex;align-items:center;justify-content:center;font-size:24px;background:rgba(109,155,58,.12)}
+.hdr h1{font-family:'Rubik',sans-serif;font-size:1.4rem;font-weight:700;color:var(--olive-lt);letter-spacing:.3px}
+.hdr h2{font-size:.78rem;font-weight:400;color:var(--text-2);margin-top:1px}
+.hdr-meta{font-size:.72rem;color:var(--text-3);text-align:left;direction:ltr;line-height:1.5}
 
-body {
-  font-family:'Heebo',sans-serif;
-  background:var(--bg-base);
-  color:var(--text-1);
-  min-height:100vh;
+.app{max-width:1420px;margin:0 auto;padding:18px}
+
+/* === INPUTS === */
+input,select,textarea{width:100%;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--rs);color:var(--text-1);font-family:'Heebo',sans-serif;font-size:.8rem;padding:8px 11px;transition:border-color .2s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--olive)}
+textarea{resize:vertical;min-height:80px;line-height:1.6}
+label{display:block;font-size:.7rem;color:var(--text-2);margin-bottom:3px;font-weight:500}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:8px 16px;border:none;border-radius:var(--rs);font-family:'Heebo',sans-serif;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
+.btn-p{background:linear-gradient(135deg,var(--olive),var(--olive-lt));color:#fff}
+.btn-p:hover{box-shadow:0 4px 14px rgba(109,155,58,.4);transform:translateY(-1px)}
+.btn-o{background:transparent;border:1px solid var(--border);color:var(--text-2)}
+.btn-o:hover{border-color:var(--olive);color:var(--text-1)}
+.btn-d{background:var(--red-dim);color:var(--red);border:1px solid rgba(217,64,64,.22)}
+.btn-sm{padding:4px 9px;font-size:.7rem}
+
+/* === TOP CONTROLS === */
+.top-bar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px;align-items:end}
+.top-bar .ctrl{display:flex;flex-direction:column}
+.top-bar .ctrl.grow{flex:1;min-width:100px}
+
+/* === VEHICLES === */
+.veh-grid{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:18px}
+.veh-card{flex:1;min-width:280px;max-width:420px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:14px;box-shadow:0 2px 10px rgba(0,0,0,.2);position:relative}
+.veh-card::before{content:'';position:absolute;top:0;right:0;left:0;height:3px;border-radius:var(--r) var(--r) 0 0}
+.vc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.vc-head h3{font-family:'Rubik',sans-serif;font-size:.88rem;font-weight:600;color:var(--gold)}
+.vc-cnt{font-size:.68rem;background:var(--bg-elevated);padding:2px 7px;border-radius:10px;color:var(--text-2)}
+.vc-fields{display:flex;gap:6px;margin-bottom:8px}
+.vc-fields>*{flex:1}
+.vc-fields input{font-size:.76rem;padding:6px 9px}
+.vc-txt{margin-bottom:8px}
+.vc-txt textarea{min-height:60px;font-size:.76rem}
+.vc-acts{display:flex;gap:5px;margin-bottom:8px}
+.vc-roster{display:flex;flex-wrap:wrap;gap:4px;min-height:24px}
+
+.chip{display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:5px;font-size:.72rem;border:1px solid var(--brd-lt);background:rgba(109,155,58,.08);color:var(--olive-lt)}
+.chip .rtag{font-size:.58rem;padding:1px 4px;border-radius:3px;background:rgba(255,255,255,.06);color:var(--text-2)}
+.chip .xb{cursor:pointer;opacity:.45;transition:opacity .15s;font-size:.78rem;margin-right:1px}
+.chip .xb:hover{opacity:1;color:var(--red)}
+
+/* === MASTER LIST === */
+.master-section{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:18px}
+.master-section h4{font-family:'Rubik',sans-serif;font-size:.85rem;font-weight:600;color:var(--cyan);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.master-list{display:flex;flex-wrap:wrap;gap:5px}
+.master-chip{display:inline-flex;align-items:center;gap:3px;padding:3px 9px;border-radius:5px;font-size:.72rem;border:1px solid var(--border);background:var(--bg-input);color:var(--text-1)}
+.master-chip .src{font-size:.58rem;padding:1px 4px;border-radius:3px;background:rgba(212,168,67,.12);color:var(--gold)}
+.master-chip .rtag{font-size:.58rem;padding:1px 4px;border-radius:3px;background:rgba(255,255,255,.06);color:var(--text-2)}
+
+/* === HISTORY IMPORT === */
+.hist-import{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:18px}
+.hist-import h4{font-family:'Rubik',sans-serif;font-size:.82rem;color:var(--gold);margin-bottom:8px}
+.hist-grid{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:end}
+@media(max-width:700px){.hist-grid{grid-template-columns:1fr}}
+
+/* === TABS === */
+.tabs{display:flex;gap:4px;margin-bottom:14px}
+.tab{flex:1;padding:8px;border:1px solid var(--border);background:var(--bg-input);color:var(--text-2);font-family:'Heebo',sans-serif;font-size:.76rem;font-weight:500;border-radius:var(--rs);cursor:pointer;text-align:center;transition:all .2s}
+.tab.on{background:rgba(109,155,58,.15);color:var(--olive-lt);border-color:var(--olive)}
+.tpanel{display:none}.tpanel.on{display:block}
+
+/* === TABLE === */
+.tw{overflow-x:auto;border-radius:var(--r);border:1px solid var(--border);background:var(--bg-card)}
+table{width:100%;border-collapse:collapse;font-size:.76rem}
+thead th{background:linear-gradient(180deg,#283050,#222b48);padding:9px 7px;font-weight:600;color:var(--gold);border-bottom:2px solid var(--olive);white-space:nowrap;text-align:center;position:sticky;top:0;z-index:5}
+tbody tr{border-bottom:1px solid var(--border);transition:background .15s}
+tbody tr:hover{background:rgba(109,155,58,.04)}
+tbody tr.night{background:rgba(30,50,90,.18)}
+tbody tr.hard{background:var(--red-dim)}
+td{padding:7px 5px;text-align:center;vertical-align:middle}
+
+.td-h{font-family:'Rubik',sans-serif;font-weight:700;font-size:.86rem;min-width:58px}
+.h-night{color:#7eb8ff;text-shadow:0 0 5px rgba(126,184,255,.2)}
+.h-day{color:var(--olive-lt)}
+.h-hard{color:var(--red);text-shadow:0 0 6px rgba(217,64,64,.25)}
+
+.bdg{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.66rem;font-weight:600;white-space:nowrap}
+.bdg-l{background:var(--blue-dim);color:var(--blue);border:1px solid rgba(74,144,217,.2)}
+.bdg-b{background:var(--red-dim);color:#ff7b7b;border:1px solid rgba(217,64,64,.2)}
+
+.cp{display:inline-flex;align-items:center;gap:3px;background:rgba(109,155,58,.08);border:1px solid rgba(109,155,58,.16);padding:3px 7px;border-radius:5px;font-size:.74rem;margin:1px}
+.cp .sw{cursor:pointer;font-size:.66rem;opacity:.35;transition:opacity .15s}
+.cp .sw:hover{opacity:1}
+.cp .rtag{font-size:.58rem;padding:1px 3px;border-radius:3px;background:rgba(255,255,255,.05);color:var(--text-2)}
+
+.cv{font-weight:600;color:var(--gold);font-size:.74rem}
+.cf{font-family:'Rubik',sans-serif;font-weight:500;color:var(--cyan);font-size:.74rem}
+
+.empty{text-align:center;padding:40px 16px;color:var(--text-3)}
+.empty .ic{font-size:2.2rem;margin-bottom:8px}
+
+/* === STATS === */
+.ss{margin-bottom:14px}
+.ss h4{font-family:'Rubik',sans-serif;font-size:.82rem;font-weight:600;color:var(--olive-lt);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+.sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(125px,1fr));gap:5px}
+.sb{background:var(--bg-input);border:1px solid var(--border);border-radius:var(--rs);padding:9px;text-align:center}
+.sb .sn{font-size:.72rem;color:var(--text-2);margin-bottom:2px}
+.sb .sv{font-family:'Rubik',sans-serif;font-size:1.1rem;font-weight:700;color:var(--olive-lt)}
+.sb .sd{font-size:.6rem;color:var(--text-3);margin-top:2px}
+
+.hcard{background:var(--bg-input);border:1px solid var(--border);border-radius:var(--rs);padding:9px 11px;margin-bottom:5px;font-size:.74rem;color:var(--text-2)}
+.hcard strong{color:var(--text-1)}
+
+/* === MODAL === */
+.mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;align-items:center;justify-content:center}
+.mbg.open{display:flex}
+.mbox{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:20px;width:90%;max-width:380px;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.mbox h3{font-family:'Rubik',sans-serif;color:var(--gold);margin-bottom:12px;font-size:.92rem}
+.mbtns{display:flex;gap:7px;margin-top:12px}
+.mbtns .btn{flex:1}
+
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(65px);background:var(--olive);color:#fff;padding:9px 20px;border-radius:7px;font-size:.78rem;font-weight:500;z-index:300;transition:transform .3s;box-shadow:0 5px 20px rgba(0,0,0,.4)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+.print-hdr{display:none}
+@media print{
+  body{background:#fff;color:#000;font-size:10px}
+  .hdr,.veh-grid,.tabs,.top-bar,.sw,.xb,.toast,.mbg,.hist-import,.master-section{display:none!important}
+  .app{padding:0}
+  .tpanel{display:block!important}
+  #pStats,#pHist{display:none!important}
+  .print-hdr{display:block;text-align:center;margin-bottom:14px;border-bottom:2px solid #333;padding-bottom:8px}
+  .print-hdr h1{font-size:16px}.print-hdr p{font-size:10px;color:#555}
+  .tw{border:1px solid #999}
+  table{font-size:9px}
+  thead th{background:#ddd!important;color:#000;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  td,th{border:1px solid #bbb}
+  .bdg,.cp{background:transparent!important;border:1px solid #999;color:#000}
+  .cv,.cf,.td-h{color:#000!important;text-shadow:none!important}
+  tbody tr.night,tbody tr.hard{background:transparent!important}
 }
-
-.header {
-  background: linear-gradient(135deg,#1a2236 0%,#151e30 100%);
-  border-bottom: 3px solid var(--olive);
-  padding: 16px 28px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: var(--shadow);
-}
-
-.header-right { display:flex; align-items:center; gap:14px; }
-
-.emblem {
-  width:52px; height:52px; border-radius:50%;
-  border:2px solid var(--olive);
-  display:flex; align-items:center; justify-content:center;
-  font-size:26px; background:rgba(109,155,58,0.12);
-}
-
-.header h1 {
-  font-family:'Rubik',sans-serif; font-size:1.5rem;
-  font-weight:700; color:var(--olive-light); letter-spacing:.3px;
-}
-.header h2 { font-size:.8rem; font-weight:400; color:var(--text-2); margin-top:1px; }
-.header-meta { font-size:.75rem; color:var(--text-3); text-align:left; direction:ltr; line-height:1.5; }
-
-.app { max-width:1400px; margin:0 auto; padding:20px; }
-
-.top-controls {
-  display:grid; grid-template-columns:1fr 1fr 1fr auto;
-  gap:12px; margin-bottom:20px; align-items:end;
-}
-
-@media(max-width:900px){ .top-controls{grid-template-columns:1fr 1fr;} }
-
-.ctrl-group label {
-  display:block; font-size:.72rem; color:var(--text-2);
-  margin-bottom:4px; font-weight:500;
-}
-
-input,select,textarea {
-  width:100%; background:var(--bg-input); border:1px solid var(--border);
-  border-radius:var(--radius-sm); color:var(--text-1);
-  font-family:'Heebo',sans-serif; font-size:.82rem; padding:9px 12px;
-  transition: border-color .2s;
-}
-input:focus,select:focus,textarea:focus { outline:none; border-color:var(--olive); }
-textarea { resize:vertical; min-height:90px; line-height:1.6; }
-
-.btn {
-  display:inline-flex; align-items:center; justify-content:center; gap:6px;
-  padding:9px 18px; border:none; border-radius:var(--radius-sm);
-  font-family:'Heebo',sans-serif; font-size:.82rem; font-weight:600;
-  cursor:pointer; transition:all .2s; white-space:nowrap;
-}
-.btn-primary { background:linear-gradient(135deg,var(--olive),var(--olive-light)); color:#fff; }
-.btn-primary:hover { box-shadow:0 4px 16px rgba(109,155,58,.4); transform:translateY(-1px); }
-.btn-outline { background:transparent; border:1px solid var(--border); color:var(--text-2); }
-.btn-outline:hover { border-color:var(--olive); color:var(--text-1); }
-.btn-danger { background:var(--red-dim); color:var(--red); border:1px solid rgba(217,64,64,.25); }
-.btn-danger:hover { background:rgba(217,64,64,.25); }
-.btn-sm { padding:5px 10px; font-size:.72rem; }
-.btn-block { width:100%; }
-
-.vehicles-grid {
-  display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:20px;
-}
-@media(max-width:900px){ .vehicles-grid{grid-template-columns:1fr;} }
-
-.vehicle-card {
-  background:var(--bg-card); border:1px solid var(--border);
-  border-radius:var(--radius); padding:16px; box-shadow:var(--shadow-sm);
-  position:relative;
-}
-
-.vehicle-card::before {
-  content:''; position:absolute; top:0; right:0; left:0; height:3px;
-  border-radius:var(--radius) var(--radius) 0 0;
-}
-.vehicle-card.v1::before { background:var(--blue); }
-.vehicle-card.v2::before { background:var(--olive-light); }
-.vehicle-card.v3::before { background:var(--gold); }
-
-.v-header {
-  display:flex; align-items:center; justify-content:space-between;
-  margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--border);
-}
-
-.v-header h3 {
-  font-family:'Rubik',sans-serif; font-size:.92rem; font-weight:600;
-}
-.v1 .v-header h3 { color:var(--blue); }
-.v2 .v-header h3 { color:var(--olive-light); }
-.v3 .v-header h3 { color:var(--gold); }
-
-.v-header .v-count {
-  font-size:.7rem; background:var(--bg-elevated);
-  padding:2px 8px; border-radius:10px; color:var(--text-2);
-}
-
-.v-fields { display:flex; gap:8px; margin-bottom:10px; }
-.v-fields > * { flex:1; }
-.v-fields label { font-size:.68rem; }
-.v-fields input { font-size:.78rem; padding:7px 10px; }
-
-.v-names-area { margin-bottom:10px; }
-.v-names-area textarea { min-height:70px; font-size:.78rem; }
-
-.v-actions { display:flex; gap:6px; margin-bottom:10px; }
-
-.v-roster { display:flex; flex-wrap:wrap; gap:5px; min-height:28px; }
-
-.person-chip {
-  display:inline-flex; align-items:center; gap:3px;
-  padding:3px 9px; border-radius:5px; font-size:.74rem;
-  border:1px solid;
-}
-.v1 .person-chip { background:var(--blue-dim); border-color:rgba(74,144,217,.25); color:var(--blue); }
-.v2 .person-chip { background:rgba(109,155,58,.1); border-color:rgba(109,155,58,.25); color:var(--olive-light); }
-.v3 .person-chip { background:rgba(212,168,67,.1); border-color:rgba(212,168,67,.25); color:var(--gold); }
-
-.person-chip .role-tag {
-  font-size:.6rem; padding:1px 4px; border-radius:3px;
-  background:rgba(255,255,255,.06); color:var(--text-2);
-}
-
-.person-chip .x-btn {
-  cursor:pointer; opacity:.5; transition:opacity .15s; font-size:.8rem; margin-right:1px;
-}
-.person-chip .x-btn:hover { opacity:1; color:var(--red); }
-
-.tabs { display:flex; gap:4px; margin-bottom:16px; }
-.tab {
-  flex:1; padding:9px; border:1px solid var(--border); background:var(--bg-input);
-  color:var(--text-2); font-family:'Heebo',sans-serif; font-size:.78rem;
-  font-weight:500; border-radius:var(--radius-sm); cursor:pointer; text-align:center;
-  transition:all .2s;
-}
-.tab.active {
-  background:rgba(109,155,58,.15); color:var(--olive-light); border-color:var(--olive);
-}
-.tab-panel { display:none; }
-.tab-panel.active { display:block; }
-
-.table-wrap {
-  overflow-x:auto; border-radius:var(--radius);
-  border:1px solid var(--border); background:var(--bg-card);
-}
-
-table { width:100%; border-collapse:collapse; font-size:.78rem; }
-
-thead th {
-  background:linear-gradient(180deg,#283050,#222b48);
-  padding:10px 8px; font-weight:600; color:var(--gold);
-  border-bottom:2px solid var(--olive); white-space:nowrap;
-  text-align:center; position:sticky; top:0; z-index:5;
-}
-
-tbody tr { border-bottom:1px solid var(--border); transition:background .15s; }
-tbody tr:hover { background:rgba(109,155,58,.04); }
-tbody tr.night { background:rgba(30,50,90,.2); }
-tbody tr.hard-hour { background:var(--hard-hour-bg); }
-
-td { padding:8px 6px; text-align:center; vertical-align:middle; }
-
-.td-hour {
-  font-family:'Rubik',sans-serif; font-weight:700; font-size:.88rem;
-  min-width:60px;
-}
-.hour-night { color:#7eb8ff; text-shadow:0 0 6px rgba(126,184,255,.25); }
-.hour-day { color:var(--olive-light); }
-.hour-hard { color:var(--red); text-shadow:0 0 8px rgba(217,64,64,.3); }
-
-.badge {
-  display:inline-block; padding:2px 9px; border-radius:4px;
-  font-size:.68rem; font-weight:600; white-space:nowrap;
-}
-.badge-listen { background:var(--blue-dim); color:var(--blue); border:1px solid rgba(74,144,217,.2); }
-.badge-blood { background:var(--red-dim); color:#ff7b7b; border:1px solid rgba(217,64,64,.2); }
-
-.cell-person {
-  display:inline-flex; align-items:center; gap:3px;
-  background:rgba(109,155,58,.08); border:1px solid rgba(109,155,58,.18);
-  padding:3px 8px; border-radius:5px; font-size:.76rem; margin:2px;
-}
-.cell-person .swap-ico {
-  cursor:pointer; font-size:.68rem; opacity:.4; transition:opacity .15s;
-}
-.cell-person .swap-ico:hover { opacity:1; }
-
-.cell-vehicle { font-weight:600; }
-.cell-vehicle.cv1 { color:var(--blue); }
-.cell-vehicle.cv2 { color:var(--olive-light); }
-.cell-vehicle.cv3 { color:var(--gold); }
-
-.cell-freq { font-family:'Rubik',sans-serif; font-weight:500; color:var(--cyan); font-size:.76rem; }
-
-.empty-state {
-  text-align:center; padding:50px 20px; color:var(--text-3);
-}
-.empty-state .icon { font-size:2.5rem; margin-bottom:10px; }
-
-.stats-section { margin-bottom:16px; }
-.stats-section h4 {
-  font-family:'Rubik',sans-serif; font-size:.85rem; font-weight:600;
-  margin-bottom:10px; padding-bottom:6px; border-bottom:1px solid var(--border);
-}
-.stats-section.sv1 h4 { color:var(--blue); }
-.stats-section.sv2 h4 { color:var(--olive-light); }
-.stats-section.sv3 h4 { color:var(--gold); }
-
-.stats-grid {
-  display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:6px;
-}
-.stat-box {
-  background:var(--bg-input); border:1px solid var(--border);
-  border-radius:var(--radius-sm); padding:10px; text-align:center;
-}
-.stat-box .sname { font-size:.74rem; color:var(--text-2); margin-bottom:3px; }
-.stat-box .snum { font-family:'Rubik',sans-serif; font-size:1.15rem; font-weight:700; color:var(--olive-light); }
-.stat-box .sdetail { font-size:.62rem; color:var(--text-3); margin-top:2px; }
-
-.hist-card {
-  background:var(--bg-input); border:1px solid var(--border);
-  border-radius:var(--radius-sm); padding:10px 12px; margin-bottom:6px;
-  font-size:.76rem; color:var(--text-2);
-}
-.hist-card strong { color:var(--text-1); }
-
-.history-import-section {
-  background:var(--bg-card); border:1px solid var(--border);
-  border-radius:var(--radius); padding:16px; margin-bottom:20px;
-}
-.history-import-section h4 {
-  font-family:'Rubik',sans-serif; font-size:.85rem; color:var(--gold);
-  margin-bottom:10px;
-}
-
-.modal-bg {
-  display:none; position:fixed; inset:0; background:rgba(0,0,0,.6);
-  z-index:200; align-items:center; justify-content:center;
-}
-.modal-bg.open { display:flex; }
-.modal-box {
-  background:var(--bg-card); border:1px solid var(--border);
-  border-radius:12px; padding:22px; width:90%; max-width:400px;
-  box-shadow:0 12px 48px rgba(0,0,0,.5);
-}
-.modal-box h3 { font-family:'Rubik',sans-serif; color:var(--gold); margin-bottom:14px; font-size:.95rem; }
-.modal-btns { display:flex; gap:8px; margin-top:14px; }
-.modal-btns .btn { flex:1; }
-
-.toast {
-  position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(70px);
-  background:var(--olive); color:#fff; padding:10px 22px; border-radius:8px;
-  font-size:.8rem; font-weight:500; z-index:300; transition:transform .3s;
-  box-shadow:0 6px 24px rgba(0,0,0,.45);
-}
-.toast.show { transform:translateX(-50%) translateY(0); }
-
-.print-header { display:none; }
-
-@media print {
-  body { background:#fff; color:#000; font-size:11px; }
-  .header,.vehicles-grid,.tabs,.top-controls,.swap-ico,.x-btn,
-  .toast,.modal-bg,.history-import-section,.tab:not(.active),
-  .btn-actions-row { display:none!important; }
-  .app { padding:0; }
-  .tab-panel { display:block!important; }
-  #panelStats,#panelHistory { display:none!important; }
-  .print-header { display:block; text-align:center; margin-bottom:16px; border-bottom:2px solid #333; padding-bottom:10px; }
-  .print-header h1 { font-size:18px; }
-  .print-header p { font-size:11px; color:#555; }
-  .table-wrap { border:1px solid #999; }
-  table { font-size:10px; }
-  thead th { background:#ddd!important; color:#000; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-  td,th { border:1px solid #bbb; }
-  .badge,.cell-person { background:transparent!important; border:1px solid #999; color:#000; }
-  .cell-vehicle,.cell-freq,.td-hour { color:#000!important; text-shadow:none!important; }
-  tbody tr.night, tbody tr.hard-hour { background:transparent!important; }
-}
-
-@keyframes fadeUp { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
-.fade-up { animation:fadeUp .25s ease forwards; }
-
-::-webkit-scrollbar { width:5px; height:5px; }
-::-webkit-scrollbar-track { background:var(--bg-base); }
-::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+@keyframes fu{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.fu{animation:fu .22s ease forwards}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--bg-base)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="header-right">
-    <div class="emblem">🦁</div>
-    <div>
-      <h1>שאגרת הארי</h1>
-      <h2>דוח האזנות לקשר ובדיקות דם</h2>
-    </div>
+<div class="hdr">
+  <div class="hdr-r">
+    <div class="emb">🦁</div>
+    <div><h1>שאגרת הארי</h1><h2>דוח האזנות לקשר ובדיקות דם</h2></div>
   </div>
-  <div class="header-meta" id="headerMeta"></div>
+  <div class="hdr-meta" id="hMeta"></div>
 </div>
 
 <div class="app">
+  <div class="print-hdr"><h1>שאגרת הארי - דוח האזנות ובדיקות דם</h1><p id="pMeta"></p></div>
 
-  <div class="print-header">
-    <h1>שאגרת הארי - דוח האזנות ובדיקות דם</h1>
-    <p id="printMeta"></p>
-  </div>
-
-  <div class="top-controls">
-    <div class="ctrl-group">
-      <label>משעה</label>
-      <select id="selFrom"></select>
-    </div>
-    <div class="ctrl-group">
-      <label>עד שעה</label>
-      <select id="selTo"></select>
-    </div>
-    <div class="ctrl-group">
-      <label>תאריך</label>
-      <input type="date" id="schedDate" />
-    </div>
-    <div class="ctrl-group" style="display:flex;gap:6px;align-items:end;">
-      <button class="btn btn-primary" onclick="generate()">📋 הפק לוח</button>
-      <button class="btn btn-outline" onclick="printReport()">🖨️ הדפס</button>
-      <button class="btn btn-outline" onclick="exportText()">📤 העתק</button>
+  <!-- Top controls -->
+  <div class="top-bar">
+    <div class="ctrl"><label>משעה</label><select id="sFrom"></select></div>
+    <div class="ctrl"><label>עד שעה</label><select id="sTo"></select></div>
+    <div class="ctrl"><label>תאריך</label><input type="date" id="sDate"/></div>
+    <div class="ctrl" style="flex-direction:row;gap:5px;align-items:end">
+      <button class="btn btn-p" onclick="generate()">📋 הפק לוח</button>
+      <button class="btn btn-o" onclick="printReport()">🖨️</button>
+      <button class="btn btn-o" onclick="exportText()">📤</button>
     </div>
   </div>
 
-  <div class="vehicles-grid">
-    <div class="vehicle-card v1">
-      <div class="v-header">
-        <h3>🚙 רכב 1</h3>
-        <span class="v-count" id="vc1">0 לוחמים</span>
-      </div>
-      <div class="v-fields">
-        <div><label>שם רכב</label><input id="vname1" value="נמר 1" /></div>
-        <div><label>תדר</label><input id="vfreq1" placeholder="לדוגמה: 41.200" /></div>
-      </div>
-      <div class="v-names-area">
-        <label>הדבק שמות (שם בכל שורה, תפקיד אחרי פסיק)</label>
-        <textarea id="vtxt1" placeholder="ישראל כהן, לוחם&#10;דוד לוי, נהג"></textarea>
-      </div>
-      <div class="v-actions">
-        <button class="btn btn-outline btn-sm" onclick="loadRoster(1)">➕ טען</button>
-        <button class="btn btn-outline btn-sm" onclick="clearRoster(1)">🗑️ נקה</button>
-      </div>
-      <div class="v-roster" id="vroster1"></div>
-    </div>
+  <!-- Vehicle cards -->
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+    <span style="font-family:'Rubik',sans-serif;font-size:.85rem;font-weight:600;color:var(--gold)">🚙 רכבים</span>
+    <button class="btn btn-o btn-sm" onclick="addVehicle()">➕ הוסף רכב</button>
+  </div>
+  <div class="veh-grid" id="vGrid"></div>
 
-    <div class="vehicle-card v2">
-      <div class="v-header">
-        <h3>🚙 רכב 2</h3>
-        <span class="v-count" id="vc2">0 לוחמים</span>
-      </div>
-      <div class="v-fields">
-        <div><label>שם רכב</label><input id="vname2" value="נמר 2" /></div>
-        <div><label>תדר</label><input id="vfreq2" placeholder="לדוגמה: 42.400" /></div>
-      </div>
-      <div class="v-names-area">
-        <label>הדבק שמות (שם בכל שורה, תפקיד אחרי פסיק)</label>
-        <textarea id="vtxt2" placeholder="משה גולן, חובש&#10;אבי שלום, מפקד"></textarea>
-      </div>
-      <div class="v-actions">
-        <button class="btn btn-outline btn-sm" onclick="loadRoster(2)">➕ טען</button>
-        <button class="btn btn-outline btn-sm" onclick="clearRoster(2)">🗑️ נקה</button>
-      </div>
-      <div class="v-roster" id="vroster2"></div>
-    </div>
-
-    <div class="vehicle-card v3">
-      <div class="v-header">
-        <h3>🚙 רכב 3</h3>
-        <span class="v-count" id="vc3">0 לוחמים</span>
-      </div>
-      <div class="v-fields">
-        <div><label>שם רכב</label><input id="vname3" value="נמר 3" /></div>
-        <div><label>תדר</label><input id="vfreq3" placeholder="לדוגמה: 43.600" /></div>
-      </div>
-      <div class="v-names-area">
-        <label>הדבק שמות (שם בכל שורה, תפקיד אחרי פסיק)</label>
-        <textarea id="vtxt3" placeholder="יוסי בן דוד, מטב&#10;ניר אברהם, לוחם"></textarea>
-      </div>
-      <div class="v-actions">
-        <button class="btn btn-outline btn-sm" onclick="loadRoster(3)">➕ טען</button>
-        <button class="btn btn-outline btn-sm" onclick="clearRoster(3)">🗑️ נקה</button>
-      </div>
-      <div class="v-roster" id="vroster3"></div>
-    </div>
+  <!-- Master list -->
+  <div class="master-section">
+    <h4>👥 רשימת כוח כללית (<span id="masterCnt">0</span> לוחמים מכל הרכבים)</h4>
+    <div class="master-list" id="masterList"></div>
   </div>
 
-  <div class="history-import-section">
+  <!-- History import -->
+  <div class="hist-import">
     <h4>📜 היסטוריה קודמת (לחלוקה שוויונית)</h4>
-    <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end;">
-      <div>
-        <label>שמירות קודמות (שם - מספר)</label>
-        <textarea id="histImport" style="min-height:60px;" placeholder="ישראל כהן - 3&#10;דוד לוי - 5"></textarea>
-      </div>
-      <div>
-        <label>שמרו בשעות קשות (01-05) לאחרונה</label>
-        <textarea id="hardExclude" style="min-height:60px;" placeholder="ישראל כהן&#10;דוד לוי"></textarea>
-      </div>
-      <button class="btn btn-outline" onclick="importHistory()">📥 טען</button>
+    <div class="hist-grid">
+      <div><label>שמירות קודמות (שם - מספר)</label>
+        <textarea id="hImp" style="min-height:55px" placeholder="ישראל כהן - 3&#10;דוד לוי - 5"></textarea></div>
+      <div><label>שמרו בשעות קשות (01-07) לאחרונה - שם, שעה</label>
+        <textarea id="hHard" style="min-height:55px" placeholder="ישראל כהן, 3&#10;דוד לוי, 5"></textarea></div>
+      <button class="btn btn-o" onclick="importHist()">📥 טען</button>
     </div>
   </div>
 
+  <!-- Tabs -->
   <div class="tabs">
-    <button class="tab active" onclick="openTab('schedule')">📋 לוח שמירות</button>
+    <button class="tab on" onclick="openTab('sched')">📋 לוח שמירות</button>
     <button class="tab" onclick="openTab('stats')">📊 סטטיסטיקה</button>
-    <button class="tab" onclick="openTab('history')">📜 היסטוריה</button>
+    <button class="tab" onclick="openTab('hist')">📜 היסטוריה</button>
   </div>
 
-  <div class="tab-panel active" id="panelSchedule">
-    <div class="table-wrap">
-      <div id="scheduleOut">
-        <div class="empty-state"><div class="icon">📡</div><div>הגדר רכבים ולחץ "הפק לוח"</div></div>
-      </div>
+  <div class="tpanel on" id="pSched">
+    <div class="tw"><div id="schedOut"><div class="empty"><div class="ic">📡</div><div>הגדר רכבים ולחץ "הפק לוח"</div></div></div></div>
+  </div>
+  <div class="tpanel" id="pStats">
+    <div id="statsOut" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:14px">
+      <div class="empty">אין נתונים</div>
     </div>
   </div>
-
-  <div class="tab-panel" id="panelStats">
-    <div id="statsOut" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;">
-      <div class="empty-state">אין נתונים</div>
-    </div>
-  </div>
-
-  <div class="tab-panel" id="panelHistory">
-    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <h4 style="font-family:'Rubik',sans-serif;font-size:.85rem;color:var(--gold);">היסטוריית הפקות</h4>
-        <button class="btn btn-danger btn-sm" onclick="clearEverything()">🗑️ נקה הכל</button>
+  <div class="tpanel" id="pHist">
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <h4 style="font-family:'Rubik',sans-serif;font-size:.82rem;color:var(--gold)">היסטוריית הפקות</h4>
+        <button class="btn btn-d btn-sm" onclick="clearAll()">🗑️ נקה הכל</button>
       </div>
-      <div id="historyOut"><div class="empty-state">אין היסטוריה</div></div>
+      <div id="histOut"><div class="empty">אין היסטוריה</div></div>
     </div>
   </div>
 </div>
 
-<div class="modal-bg" id="swapModal">
-  <div class="modal-box">
+<div class="mbg" id="swapModal">
+  <div class="mbox">
     <h3>🔄 החלפת שומר</h3>
-    <p style="font-size:.76rem;color:var(--text-2);margin-bottom:12px;" id="swapInfo"></p>
-    <div style="margin-bottom:8px;">
-      <label>בחר חלופי</label>
-      <select id="swapSelect"></select>
-    </div>
-    <div class="modal-btns">
-      <button class="btn btn-primary" onclick="confirmSwap()">אישור</button>
-      <button class="btn btn-outline" onclick="closeSwap()">ביטול</button>
+    <p style="font-size:.74rem;color:var(--text-2);margin-bottom:10px" id="swapInfo"></p>
+    <div style="margin-bottom:6px"><label>בחר חלופי</label><select id="swapSel"></select></div>
+    <div class="mbtns">
+      <button class="btn btn-p" onclick="doSwap()">אישור</button>
+      <button class="btn btn-o" onclick="closeSwap()">ביטול</button>
     </div>
   </div>
 </div>
@@ -508,341 +272,490 @@ td { padding:8px 6px; text-align:center; vertical-align:middle; }
 <script>
 (function(){
 
-const VEH = {1:{roster:[],name:'',freq:''}, 2:{roster:[],name:'',freq:''}, 3:{roster:[],name:'',freq:''}};
+/* ═══════════ STATE ═══════════ */
+let vehicles = [
+  {id:1, name:'קוברה 1', freq:'', roster:[]},
+  {id:2, name:'קוברה 2', freq:'', roster:[]},
+  {id:3, name:'קוברה 3', freq:'', roster:[]},
+];
 let schedule = [];
-let guardHistory = {};
-let hardHistory = {};
-let recentHard = new Set();
+let guardHist = {};    // name -> total count
+let hardHourHist = {}; // name -> {hour: count}  e.g. {"03":2, "05":1}
+let pairHist = {};     // "nameA||nameB" -> count
 let logs = [];
 let swapCtx = null;
-let uidSeq = 0;
+let uid = 100;
+let vid = 10;
 
 const ROLES = ['לוחם','מפקד','נהג','מאג','מטב','חובש'];
-const isHardHour = h => h >= 1 && h <= 4;
-const isNightHour = h => h >= 22 || h < 6;
+const isHard = h => h >= 1 && h <= 6; // 01:00-06:59
+const isNight = h => h >= 22 || h < 7;
+const hPad = h => String(h).padStart(2,'0');
+const pairKey = (a,b) => [a,b].sort().join('||');
 
+/* ═══════════ INIT ═══════════ */
 function init(){
   const now = new Date();
-  document.getElementById('headerMeta').innerHTML =
+  document.getElementById('hMeta').innerHTML =
     now.toLocaleDateString('he-IL',{weekday:'long',year:'numeric',month:'long',day:'numeric'})+'<br>'+
     now.toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'});
 
-  const f = document.getElementById('selFrom'), t = document.getElementById('selTo');
+  const f=document.getElementById('sFrom'), t=document.getElementById('sTo');
   for(let h=0;h<24;h++){
-    const lbl = String(h).padStart(2,'0')+':00';
-    f.add(new Option(lbl,h)); t.add(new Option(lbl,h));
+    const l=hPad(h)+':00';
+    f.add(new Option(l,h)); t.add(new Option(l,h));
   }
   f.value=18; t.value=6;
-  document.getElementById('schedDate').valueAsDate = now;
-  load();
-  [1,2,3].forEach(renderRoster);
+  document.getElementById('sDate').valueAsDate=now;
+
+  loadStorage();
+  renderVehicles();
+  renderMaster();
+  renderSchedule();
+  renderStats();
+  renderHist();
 }
 
-window.loadRoster = function(v){
-  const raw = document.getElementById('vtxt'+v).value.trim();
+/* ═══════════ VEHICLE MANAGEMENT ═══════════ */
+window.addVehicle = function(){
+  vid++;
+  vehicles.push({id:vid, name:'קוברה '+(vehicles.length+1), freq:'', roster:[]});
+  renderVehicles();
+  renderMaster();
+  save();
+  toast('רכב חדש נוסף');
+};
+
+window.removeVehicle = function(id){
+  if(vehicles.length<=1) return toast('חייב להישאר לפחות רכב אחד');
+  if(!confirm('להסיר את הרכב?')) return;
+  vehicles = vehicles.filter(v=>v.id!==id);
+  renderVehicles();
+  renderMaster();
+  save();
+};
+
+window.loadRoster = function(id){
+  const v = vehicles.find(x=>x.id===id);
+  if(!v) return;
+  const txt = document.getElementById('vtxt_'+id);
+  if(!txt) return;
+  const raw = txt.value.trim();
   if(!raw) return toast('הזן שמות');
   const lines = raw.split('\n').map(l=>l.trim()).filter(Boolean);
-  let added = 0;
+  let added=0;
   lines.forEach(line=>{
     const parts = line.split(',').map(s=>s.trim());
     const name = parts[0];
-    const role = ROLES.includes(parts[1]) ? parts[1] : 'לוחם';
-    if(name && !VEH[v].roster.find(p=>p.name===name)){
-      VEH[v].roster.push({name, role, id:++uidSeq});
+    const role = ROLES.includes(parts[1])?parts[1]:'לוחם';
+    if(name && !v.roster.find(p=>p.name===name)){
+      v.roster.push({name,role,id:++uid});
       added++;
     }
   });
-  document.getElementById('vtxt'+v).value = '';
-  renderRoster(v);
+  txt.value='';
+  renderVehicles();
+  renderMaster();
   save();
-  toast(added+' נוספו ל'+getVName(v));
+  toast(added+' נוספו ל'+v.name);
 };
 
-window.clearRoster = function(v){
-  if(!confirm('לנקות את רשימת '+getVName(v)+'?')) return;
-  VEH[v].roster = [];
-  renderRoster(v);
-  save();
-};
-
-window.removePerson = function(v, id){
-  VEH[v].roster = VEH[v].roster.filter(p=>p.id!==id);
-  renderRoster(v);
+window.clearRoster = function(id){
+  const v=vehicles.find(x=>x.id===id);
+  if(!v)return;
+  if(!confirm('לנקות את '+v.name+'?'))return;
+  v.roster=[];
+  renderVehicles();
+  renderMaster();
   save();
 };
 
-function getVName(v){ return document.getElementById('vname'+v).value || 'רכב '+v; }
+window.removePerson = function(vid2,pid){
+  const v=vehicles.find(x=>x.id===vid2);
+  if(!v)return;
+  v.roster=v.roster.filter(p=>p.id!==pid);
+  renderVehicles();
+  renderMaster();
+  save();
+};
 
-function renderRoster(v){
-  VEH[v].name = document.getElementById('vname'+v).value;
-  VEH[v].freq = document.getElementById('vfreq'+v).value;
-  const el = document.getElementById('vroster'+v);
-  el.innerHTML = VEH[v].roster.map(p=>`
-    <span class="person-chip">
-      <span class="x-btn" onclick="removePerson(${v},${p.id})">✕</span>
-      ${esc(p.name)} <span class="role-tag">${esc(p.role)}</span>
-    </span>`).join('');
-  document.getElementById('vc'+v).textContent = VEH[v].roster.length+' לוחמים';
+window.updateVehicle = function(id,field){
+  const v=vehicles.find(x=>x.id===id);
+  if(!v)return;
+  const el=document.getElementById('v'+field+'_'+id);
+  if(el) v[field]=el.value;
+  save();
+};
+
+function renderVehicles(){
+  const grid = document.getElementById('vGrid');
+  const colors = ['var(--blue)','var(--olive-lt)','var(--gold)','var(--cyan)','var(--red)','#c084fc'];
+
+  grid.innerHTML = vehicles.map((v,i)=>{
+    const c = colors[i%colors.length];
+    return `
+    <div class="veh-card" style="--vc:${c}">
+      <style>.veh-card[style*="${c}"]::before{background:${c}}</style>
+      <div class="vc-head">
+        <h3 style="color:${c}">🚙 ${esc(v.name)}</h3>
+        <div style="display:flex;gap:4px;align-items:center">
+          <span class="vc-cnt">${v.roster.length} לוחמים</span>
+          <button class="btn btn-d btn-sm" onclick="removeVehicle(${v.id})" title="הסר רכב">✕</button>
+        </div>
+      </div>
+      <div class="vc-fields">
+        <div><label>שם רכב</label><input id="vname_${v.id}" value="${esc(v.name)}" onchange="updateVehicle(${v.id},'name');renderVehicles()"/></div>
+        <div><label>תדר</label><input id="vfreq_${v.id}" value="${esc(v.freq)}" onchange="updateVehicle(${v.id},'freq')" placeholder="לדוגמה: 41.200"/></div>
+      </div>
+      <div class="vc-txt">
+        <label>הדבק שמות (שם בכל שורה, תפקיד אחרי פסיק)</label>
+        <textarea id="vtxt_${v.id}" placeholder="ישראל כהן, לוחם&#10;דוד לוי, נהג"></textarea>
+      </div>
+      <div class="vc-acts">
+        <button class="btn btn-o btn-sm" onclick="loadRoster(${v.id})">➕ טען</button>
+        <button class="btn btn-o btn-sm" onclick="clearRoster(${v.id})">🗑️ נקה</button>
+      </div>
+      <div class="vc-roster">${v.roster.map(p=>`
+        <span class="chip">
+          <span class="xb" onclick="removePerson(${v.id},${p.id})">✕</span>
+          ${esc(p.name)} <span class="rtag">${esc(p.role)}</span>
+        </span>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
 }
 
-window.importHistory = function(){
-  const raw = document.getElementById('histImport').value.trim();
-  if(raw) raw.split('\n').forEach(line=>{
-    const m = line.match(/^(.+?)\s*-\s*(\d+)/);
-    if(m) guardHistory[m[1].trim()] = parseInt(m[2]);
+function getAllPeople(){
+  const map = {};
+  vehicles.forEach(v=>{
+    v.roster.forEach(p=>{
+      if(!map[p.name]) map[p.name]={name:p.name, role:p.role, vehicles:[]};
+      map[p.name].vehicles.push(v.name);
+    });
   });
-  const hRaw = document.getElementById('hardExclude').value.trim();
-  recentHard = new Set();
-  if(hRaw) hRaw.split('\n').forEach(l=>{ const n=l.trim(); if(n) recentHard.add(n); });
+  return Object.values(map);
+}
+
+function renderMaster(){
+  const people = getAllPeople();
+  document.getElementById('masterCnt').textContent = people.length;
+  document.getElementById('masterList').innerHTML = people.length
+    ? people.map(p=>`
+      <span class="master-chip">
+        ${esc(p.name)}
+        <span class="rtag">${esc(p.role)}</span>
+        <span class="src">${esc(p.vehicles.join(', '))}</span>
+      </span>`).join('')
+    : '<span style="color:var(--text-3);font-size:.76rem">אין אנשים - הוסף לרכבים</span>';
+}
+
+/* ═══════════ HISTORY IMPORT ═══════════ */
+window.importHist = function(){
+  const raw = document.getElementById('hImp').value.trim();
+  if(raw) raw.split('\n').forEach(line=>{
+    const m=line.match(/^(.+?)\s*-\s*(\d+)/);
+    if(m) guardHist[m[1].trim()]=parseInt(m[2]);
+  });
+
+  const hRaw = document.getElementById('hHard').value.trim();
+  if(hRaw) hRaw.split('\n').forEach(line=>{
+    const parts = line.split(',').map(s=>s.trim());
+    if(parts.length>=2){
+      const name=parts[0], hour=parts[1];
+      if(!hardHourHist[name]) hardHourHist[name]={};
+      const hKey=hPad(parseInt(hour));
+      hardHourHist[name][hKey]=(hardHourHist[name][hKey]||0)+1;
+    }
+  });
+
   save();
   toast('היסטוריה נטענה');
 };
 
+/* ═══════════ SCHEDULE GENERATION ═══════════ */
 window.generate = function(){
-  [1,2,3].forEach(v=>{
-    VEH[v].name = document.getElementById('vname'+v).value || 'רכב '+v;
-    VEH[v].freq = document.getElementById('vfreq'+v).value || '-';
+  // Sync vehicle data
+  vehicles.forEach(v=>{
+    const nEl=document.getElementById('vname_'+v.id);
+    const fEl=document.getElementById('vfreq_'+v.id);
+    if(nEl) v.name=nEl.value||v.name;
+    if(fEl) v.freq=fEl.value;
   });
 
-  const activeV = [1,2,3].filter(v=>VEH[v].roster.length>=2);
-  if(!activeV.length) return toast('נדרשים לפחות 2 אנשים ברכב אחד');
+  const allPeople = getAllPeople();
+  if(allPeople.length<2) return toast('נדרשים לפחות 2 אנשים ברכבים');
 
-  const hFrom = parseInt(document.getElementById('selFrom').value);
-  const hTo = parseInt(document.getElementById('selTo').value);
-  const dateStr = document.getElementById('schedDate').value;
+  const hFrom=parseInt(document.getElementById('sFrom').value);
+  const hTo=parseInt(document.getElementById('sTo').value);
+  const dateStr=document.getElementById('sDate').value;
 
-  let hours = [];
-  if(hFrom < hTo){
-    for(let h=hFrom;h<hTo;h++) hours.push(h);
-  } else {
-    for(let h=hFrom;h<24;h++) hours.push(h);
-    for(let h=0;h<hTo;h++) hours.push(h);
-  }
+  let hours=[];
+  if(hFrom<hTo) for(let h=hFrom;h<hTo;h++) hours.push(h);
+  else { for(let h=hFrom;h<24;h++) hours.push(h); for(let h=0;h<hTo;h++) hours.push(h); }
   if(!hours.length) return toast('טווח שעות לא תקין');
 
-  // Per-vehicle tracking
-  const vUsage = {}, vCycle = {}, vHard = {};
-  activeV.forEach(v=>{
-    vUsage[v] = {}; vCycle[v] = new Set(); vHard[v] = {};
-    VEH[v].roster.forEach(p=>{
-      vUsage[v][p.name] = guardHistory[p.name] || 0;
-      vHard[v][p.name] = hardHistory[p.name] || 0;
-    });
+  // Working copies of history
+  const usage = {};
+  const hardUsage = {}; // name -> {hourKey: count}
+  const pairUse = {...pairHist};
+  const cycleUsed = new Set();
+
+  allPeople.forEach(p=>{
+    usage[p.name] = guardHist[p.name]||0;
+    hardUsage[p.name] = {...(hardHourHist[p.name]||{})};
   });
 
-  function pick(v, hour, excluded){
-    const roster = VEH[v].roster;
-    let pool = roster.filter(p => !excluded.includes(p.name));
-    if(!pool.length) pool = roster.filter(p => !excluded.includes(p.name));
-    if(!pool.length) pool = [...roster];
+  function totalHard(name){
+    return Object.values(hardUsage[name]||{}).reduce((s,v)=>s+v,0);
+  }
 
-    let fresh = pool.filter(p => !vCycle[v].has(p.name));
-    if(!fresh.length){ vCycle[v].clear(); fresh = pool; }
+  function hardAtHour(name, h){
+    return (hardUsage[name]||{})[hPad(h)]||0;
+  }
 
-    const hard = isHardHour(hour);
+  function pick(hour, excluded){
+    let pool = allPeople.filter(p=>!excluded.includes(p.name));
+    if(!pool.length) pool = [...allPeople];
 
-    fresh.sort((a,b) => {
-      if(hard){
-        const aR = recentHard.has(a.name)?1:0, bR = recentHard.has(b.name)?1:0;
-        if(aR!==bR) return aR-bR;
-        const aH = vHard[v][a.name]||0, bH = vHard[v][b.name]||0;
-        if(aH!==bH) return aH-bH;
+    // Cycle: everyone goes once before repeating
+    let fresh = pool.filter(p=>!cycleUsed.has(p.name));
+    if(!fresh.length){ cycleUsed.clear(); fresh=pool; }
+
+    const hardH = isHard(hour);
+    const hourKey = hPad(hour);
+
+    // Multi-criteria sort
+    fresh.sort((a,b)=>{
+      // 1. For hard hours: prefer those with FEWER total hard shifts
+      if(hardH){
+        const aTotal = totalHard(a.name), bTotal = totalHard(b.name);
+        if(aTotal!==bTotal) return aTotal-bTotal;
+
+        // 2. Among equal total hard, prefer those who did NOT do THIS specific hour before
+        const aThis = hardAtHour(a.name,hour), bThis = hardAtHour(b.name,hour);
+        if(aThis!==bThis) return aThis-bThis;
       }
-      return (vUsage[v][a.name]||0) - (vUsage[v][b.name]||0);
+
+      // 3. General usage fairness
+      return (usage[a.name]||0) - (usage[b.name]||0);
     });
 
-    // Among top candidates with same score, randomize
-    const topScore = (vUsage[v][fresh[0].name]||0);
-    let candidates;
-    if(hard){
-      const topHard = vHard[v][fresh[0].name]||0;
-      const topRecent = recentHard.has(fresh[0].name);
-      candidates = fresh.filter(p =>
-        recentHard.has(p.name)===topRecent &&
-        (vHard[v][p.name]||0)===topHard &&
-        (vUsage[v][p.name]||0)===topScore
-      );
-    } else {
-      candidates = fresh.filter(p => (vUsage[v][p.name]||0)===topScore);
+    // Gather top-tier candidates (same scores as #1)
+    const best = fresh[0];
+    const bestUsage = usage[best.name]||0;
+    const bestHardTotal = hardH?totalHard(best.name):0;
+    const bestHardThis = hardH?hardAtHour(best.name,hour):0;
+
+    let candidates = fresh.filter(p=>{
+      if(hardH){
+        if(totalHard(p.name)!==bestHardTotal) return false;
+        if(hardAtHour(p.name,hour)!==bestHardThis) return false;
+      }
+      return (usage[p.name]||0)===bestUsage;
+    });
+
+    if(!candidates.length) candidates=[best];
+
+    // If we have an excluded (first pick), try to avoid repeated pairs
+    if(excluded.length===1){
+      const partner = excluded[0];
+      candidates.sort((a,b)=>{
+        return (pairUse[pairKey(a.name,partner)]||0) - (pairUse[pairKey(b.name,partner)]||0);
+      });
+      const minPair = pairUse[pairKey(candidates[0].name,partner)]||0;
+      candidates = candidates.filter(p=>(pairUse[pairKey(p.name,partner)]||0)===minPair);
     }
-    if(!candidates.length) candidates = [fresh[0]];
 
     const chosen = candidates[Math.floor(Math.random()*candidates.length)];
-    vCycle[v].add(chosen.name);
-    vUsage[v][chosen.name] = (vUsage[v][chosen.name]||0)+1;
-    if(hard) vHard[v][chosen.name] = (vHard[v][chosen.name]||0)+1;
+
+    cycleUsed.add(chosen.name);
+    usage[chosen.name]=(usage[chosen.name]||0)+1;
+    if(hardH){
+      if(!hardUsage[chosen.name]) hardUsage[chosen.name]={};
+      hardUsage[chosen.name][hourKey]=(hardUsage[chosen.name][hourKey]||0)+1;
+    }
     return chosen;
   }
 
-  schedule = [];
-  let vRot = 0;
+  // Rotate which vehicle is "on duty"
+  const activeV = vehicles.filter(v=>v.roster.length>0);
+  let vRot=0;
 
+  schedule=[];
   hours.forEach((hour,idx)=>{
-    const isBlood = idx%2===1;
-    const type = isBlood ? 'blood' : 'listen';
-    const typeLabel = isBlood ? 'בדיקות דם' : 'האזנות לקשר';
+    const blood = idx%2===1;
+    const type = blood?'blood':'listen';
+    const typeLabel = blood?'בדיקות דם':'האזנות לקשר';
 
-    const vi = activeV[vRot % activeV.length];
+    // Pick vehicle for assignment display
+    const vObj = activeV.length? activeV[vRot%activeV.length] : vehicles[0];
     vRot++;
 
-    const c1 = pick(vi, hour, []);
-    const c2 = pick(vi, hour, [c1.name]);
+    const c1 = pick(hour,[]);
+    const c2 = pick(hour,[c1.name]);
+
+    // Track pair
+    const pk = pairKey(c1.name,c2.name);
+    pairUse[pk]=(pairUse[pk]||0)+1;
 
     schedule.push({
-      hour, type, typeLabel, vehicle:vi,
-      vehicleName: VEH[vi].name, freq: VEH[vi].freq,
+      hour, type, typeLabel,
+      vName:vObj.name, vFreq:vObj.freq||'-',
       p1:{name:c1.name,role:c1.role},
       p2:{name:c2.name,role:c2.role},
-      isNight:isNightHour(hour), isHard:isHardHour(hour), date:dateStr,
+      isNight:isNight(hour), isHard:isHard(hour), date:dateStr,
     });
   });
 
-  // Update globals
-  activeV.forEach(v=>{
-    VEH[v].roster.forEach(p=>{
-      guardHistory[p.name] = vUsage[v][p.name] || guardHistory[p.name] || 0;
-      hardHistory[p.name] = vHard[v][p.name] || hardHistory[p.name] || 0;
-    });
+  // Persist updated history
+  allPeople.forEach(p=>{
+    guardHist[p.name]=usage[p.name]||0;
+    hardHourHist[p.name]=hardUsage[p.name]||{};
   });
+  pairHist={...pairUse};
 
   logs.unshift({
-    date: new Date().toLocaleString('he-IL'),
-    range: String(hFrom).padStart(2,'0')+':00-'+String(hTo).padStart(2,'0')+':00',
-    count: schedule.length, schedDate: dateStr,
+    date:new Date().toLocaleString('he-IL'),
+    range:hPad(hFrom)+':00-'+hPad(hTo)+':00',
+    count:schedule.length, schedDate:dateStr,
   });
 
-  renderSchedule(); renderStats(); renderHistory(); save();
-  openTab('schedule');
+  renderSchedule(); renderStats(); renderHist(); save();
+  openTab('sched');
   toast('הופק - '+schedule.length+' משמרות');
 };
 
+/* ═══════════ RENDER SCHEDULE ═══════════ */
 function renderSchedule(){
   if(!schedule.length){
-    document.getElementById('scheduleOut').innerHTML =
-      '<div class="empty-state"><div class="icon">📡</div><div>הגדר רכבים ולחץ "הפק לוח"</div></div>';
+    document.getElementById('schedOut').innerHTML='<div class="empty"><div class="ic">📡</div><div>הגדר רכבים ולחץ "הפק לוח"</div></div>';
     return;
   }
-
-  const vc = {1:'cv1',2:'cv2',3:'cv3'};
-  let html = `<table><thead><tr>
-    <th>שעה</th><th>סוג משימה</th><th>רכב</th><th>תדר</th><th>שומר 1</th><th>שומר 2</th>
-  </tr></thead><tbody>`;
+  let html=`<table><thead><tr><th>שעה</th><th>סוג משימה</th><th>רכב</th><th>תדר</th><th>שומר 1</th><th>שומר 2</th></tr></thead><tbody>`;
 
   schedule.forEach((r,i)=>{
-    const hS = String(r.hour).padStart(2,'0')+':00';
-    const hC = r.isHard?'hour-hard':(r.isNight?'hour-night':'hour-day');
-    const rC = r.isHard?'hard-hour fade-up':(r.isNight?'night fade-up':'fade-up');
-    const tC = r.type==='blood'?'badge-blood':'badge-listen';
-    const tI = r.type==='blood'?'🩸':'📡';
+    const hS=hPad(r.hour)+':00';
+    const hC=r.isHard?'h-hard':(r.isNight?'h-night':'h-day');
+    const rC=r.isHard?'hard fu':(r.isNight?'night fu':'fu');
+    const tC=r.type==='blood'?'bdg-b':'bdg-l';
+    const tI=r.type==='blood'?'🩸':'📡';
 
-    html += `<tr class="${rC}" style="animation-delay:${i*20}ms">
-      <td class="td-hour ${hC}">${hS}${r.isHard?' ⚠️':''}</td>
-      <td><span class="badge ${tC}">${tI} ${r.typeLabel}</span></td>
-      <td class="cell-vehicle ${vc[r.vehicle]}">${esc(r.vehicleName)}</td>
-      <td class="cell-freq">${esc(r.freq||'-')}</td>
-      <td><span class="cell-person">${esc(r.p1.name)} <span class="role-tag">${esc(r.p1.role)}</span>
-        <span class="swap-ico" onclick="openSwap(${i},1)">🔄</span></span></td>
-      <td><span class="cell-person">${esc(r.p2.name)} <span class="role-tag">${esc(r.p2.role)}</span>
-        <span class="swap-ico" onclick="openSwap(${i},2)">🔄</span></span></td>
+    html+=`<tr class="${rC}" style="animation-delay:${i*18}ms">
+      <td class="td-h ${hC}">${hS}${r.isHard?' ⚠️':''}</td>
+      <td><span class="bdg ${tC}">${tI} ${r.typeLabel}</span></td>
+      <td class="cv">${esc(r.vName)}</td>
+      <td class="cf">${esc(r.vFreq)}</td>
+      <td><span class="cp">${esc(r.p1.name)} <span class="rtag">${esc(r.p1.role)}</span>
+        <span class="sw" onclick="openSwap(${i},1)">🔄</span></span></td>
+      <td><span class="cp">${esc(r.p2.name)} <span class="rtag">${esc(r.p2.role)}</span>
+        <span class="sw" onclick="openSwap(${i},2)">🔄</span></span></td>
     </tr>`;
   });
-
-  html += '</tbody></table>';
-  document.getElementById('scheduleOut').innerHTML = html;
+  html+='</tbody></table>';
+  document.getElementById('schedOut').innerHTML=html;
 
   if(schedule.length){
-    const d = schedule[0].date||'';
-    const rng = String(schedule[0].hour).padStart(2,'0')+':00-'+
-                String(schedule[schedule.length-1].hour).padStart(2,'0')+':00';
-    document.getElementById('printMeta').textContent = 'תאריך: '+d+' | שעות: '+rng;
+    document.getElementById('pMeta').textContent=
+      'תאריך: '+(schedule[0].date||'')+' | שעות: '+hPad(schedule[0].hour)+':00-'+hPad(schedule[schedule.length-1].hour)+':00';
   }
 }
 
+/* ═══════════ RENDER STATS ═══════════ */
 function renderStats(){
-  if(!schedule.length){
-    document.getElementById('statsOut').innerHTML='<div class="empty-state">אין נתונים</div>';
-    return;
-  }
-  const perV={1:{},2:{},3:{}};
-  const hardC={}, nightC={};
+  if(!schedule.length){document.getElementById('statsOut').innerHTML='<div class="empty">אין נתונים</div>';return;}
+
+  const counts={}, hardC={}, nightC={}, hourMap={};
 
   schedule.forEach(r=>{
     [r.p1,r.p2].forEach(p=>{
-      perV[r.vehicle][p.name]=(perV[r.vehicle][p.name]||0)+1;
+      counts[p.name]=(counts[p.name]||0)+1;
       if(r.isHard) hardC[p.name]=(hardC[p.name]||0)+1;
       if(r.isNight) nightC[p.name]=(nightC[p.name]||0)+1;
+      if(r.isHard){
+        if(!hourMap[p.name]) hourMap[p.name]=[];
+        hourMap[p.name].push(hPad(r.hour)+':00');
+      }
     });
   });
 
-  const sC={1:'sv1',2:'sv2',3:'sv3'};
-  let html='';
+  const sorted=Object.entries(counts).sort((a,b)=>b[1]-a[1]);
+  let html=`<div class="ss"><h4>📊 חלוקה כללית</h4><div class="sg">${sorted.map(([name,cnt])=>`
+    <div class="sb">
+      <div class="sn">${esc(name)}</div>
+      <div class="sv">${cnt}</div>
+      <div class="sd">לילה: ${nightC[name]||0} | קשות: ${hardC[name]||0}</div>
+      <div class="sd">${hourMap[name]?'שעות קשות: '+hourMap[name].join(', '):''}</div>
+      <div class="sd">סה"כ היסטורי: ${guardHist[name]||cnt}</div>
+    </div>`).join('')}</div></div>`;
 
-  [1,2,3].forEach(v=>{
-    const entries = Object.entries(perV[v]);
-    if(!entries.length) return;
-    entries.sort((a,b)=>b[1]-a[1]);
-    html += `<div class="stats-section ${sC[v]}">
-      <h4>🚙 ${esc(VEH[v].name||'רכב '+v)} | תדר: ${esc(VEH[v].freq||'-')}</h4>
-      <div class="stats-grid">${entries.map(([name,count])=>`
-        <div class="stat-box">
-          <div class="sname">${esc(name)}</div>
-          <div class="snum">${count}</div>
-          <div class="sdetail">לילה: ${nightC[name]||0} | קשות(01-05): ${hardC[name]||0}</div>
-          <div class="sdetail">סה"כ היסטורי: ${guardHistory[name]||count}</div>
-        </div>`).join('')}</div>
-    </div>`;
+  // Pair stats
+  const pairC={};
+  schedule.forEach(r=>{
+    const k=pairKey(r.p1.name,r.p2.name);
+    pairC[k]=(pairC[k]||0)+1;
   });
+  const pairSorted=Object.entries(pairC).sort((a,b)=>b[1]-a[1]);
+  if(pairSorted.length){
+    html+=`<div class="ss"><h4>🤝 זוגות (גיוון)</h4><div class="sg">${pairSorted.map(([k,cnt])=>{
+      const [a,b]=k.split('||');
+      return `<div class="sb"><div class="sn">${esc(a)} + ${esc(b)}</div><div class="sv">${cnt}</div></div>`;
+    }).join('')}</div></div>`;
+  }
 
-  document.getElementById('statsOut').innerHTML = html||'<div class="empty-state">אין נתונים</div>';
+  document.getElementById('statsOut').innerHTML=html;
 }
 
-function renderHistory(){
-  const el=document.getElementById('historyOut');
-  if(!logs.length){ el.innerHTML='<div class="empty-state">אין היסטוריה</div>'; return; }
-  el.innerHTML = logs.map(l=>`
-    <div class="hist-card">
-      <strong>${l.date}</strong> | תאריך: ${l.schedDate||'-'} | ${l.range} | ${l.count} משמרות
-    </div>`).join('');
+/* ═══════════ RENDER HISTORY ═══════════ */
+function renderHist(){
+  const el=document.getElementById('histOut');
+  if(!logs.length){el.innerHTML='<div class="empty">אין היסטוריה</div>';return;}
+  el.innerHTML=logs.map(l=>`<div class="hcard"><strong>${l.date}</strong> | תאריך: ${l.schedDate||'-'} | ${l.range} | ${l.count} משמרות</div>`).join('');
 }
 
+/* ═══════════ SWAP ═══════════ */
 window.openSwap = function(ri,slot){
-  const row = schedule[ri];
-  const cur = slot===1?row.p1.name:row.p2.name;
-  const other = slot===1?row.p2.name:row.p1.name;
-  swapCtx = {ri,slot,vi:row.vehicle,cur};
+  const row=schedule[ri];
+  const cur=slot===1?row.p1.name:row.p2.name;
+  const other=slot===1?row.p2.name:row.p1.name;
+  swapCtx={ri,slot,cur};
 
-  document.getElementById('swapInfo').textContent =
-    getVName(row.vehicle)+' | '+String(row.hour).padStart(2,'0')+':00 | מחליף: '+cur;
+  document.getElementById('swapInfo').textContent=
+    row.vName+' | '+hPad(row.hour)+':00 | מחליף: '+cur;
 
-  const sel = document.getElementById('swapSelect');
-  sel.innerHTML = '';
-  VEH[row.vehicle].roster.forEach(p=>{
-    if(p.name!==cur && p.name!==other) sel.add(new Option(p.name+' ('+p.role+')',p.name));
+  const all=getAllPeople();
+  const sel=document.getElementById('swapSel');
+  sel.innerHTML='';
+  all.forEach(p=>{
+    if(p.name!==cur&&p.name!==other) sel.add(new Option(p.name+' ('+p.role+')',p.name));
   });
   document.getElementById('swapModal').classList.add('open');
 };
 
-window.confirmSwap = function(){
-  if(!swapCtx) return;
-  const newName = document.getElementById('swapSelect').value;
-  const newP = VEH[swapCtx.vi].roster.find(p=>p.name===newName);
-  if(!newP) return;
+window.doSwap = function(){
+  if(!swapCtx)return;
+  const newName=document.getElementById('swapSel').value;
+  const all=getAllPeople();
+  const newP=all.find(p=>p.name===newName);
+  if(!newP)return;
 
-  const row = schedule[swapCtx.ri];
-  const oldName = swapCtx.cur;
+  const row=schedule[swapCtx.ri];
+  const oldName=swapCtx.cur;
 
   if(swapCtx.slot===1) row.p1={name:newP.name,role:newP.role};
   else row.p2={name:newP.name,role:newP.role};
 
-  if(guardHistory[oldName]) guardHistory[oldName]--;
-  guardHistory[newP.name]=(guardHistory[newP.name]||0)+1;
+  if(guardHist[oldName]) guardHist[oldName]--;
+  guardHist[newP.name]=(guardHist[newP.name]||0)+1;
+
   if(row.isHard){
-    if(hardHistory[oldName]) hardHistory[oldName]--;
-    hardHistory[newP.name]=(hardHistory[newP.name]||0)+1;
+    const hk=hPad(row.hour);
+    if(hardHourHist[oldName]&&hardHourHist[oldName][hk]) hardHourHist[oldName][hk]--;
+    if(!hardHourHist[newP.name]) hardHourHist[newP.name]={};
+    hardHourHist[newP.name][hk]=(hardHourHist[newP.name][hk]||0)+1;
   }
 
   closeSwap();
-  renderSchedule(); renderStats(); save();
+  renderSchedule();renderStats();save();
   toast(oldName+' → '+newP.name);
 };
 
@@ -851,12 +764,13 @@ window.closeSwap = function(){
   swapCtx=null;
 };
 
-window.openTab = function(tab){
-  const map={schedule:'panelSchedule',stats:'panelStats',history:'panelHistory'};
-  const keys=['schedule','stats','history'];
-  document.querySelectorAll('.tab').forEach((b,i)=> b.classList.toggle('active',keys[i]===tab));
-  Object.values(map).forEach(id=> document.getElementById(id).classList.remove('active'));
-  document.getElementById(map[tab]).classList.add('active');
+/* ═══════════ TABS ═══════════ */
+window.openTab = function(t){
+  const m={sched:'pSched',stats:'pStats',hist:'pHist'};
+  const keys=['sched','stats','hist'];
+  document.querySelectorAll('.tab').forEach((b,i)=>b.classList.toggle('on',keys[i]===t));
+  Object.values(m).forEach(id=>document.getElementById(id).classList.remove('on'));
+  document.getElementById(m[t]).classList.add('on');
 };
 
 window.printReport = function(){
@@ -868,16 +782,13 @@ window.exportText = function(){
   if(!schedule.length) return toast('אין לוח');
   let txt='=== שאגרת הארי - דוח האזנות ובדיקות דם ===\n';
   txt+='תאריך: '+(schedule[0].date||'')+'\n\n';
-
   schedule.forEach(r=>{
-    const h=String(r.hour).padStart(2,'0')+':00';
-    txt+=`${h} | ${r.typeLabel} | ${r.vehicleName} | תדר: ${r.freq||'-'} | ${r.p1.name} (${r.p1.role}) + ${r.p2.name} (${r.p2.role})${r.isHard?' [שעה קשה]':''}\n`;
+    txt+=`${hPad(r.hour)}:00 | ${r.typeLabel} | ${r.vName} | תדר: ${r.vFreq} | ${r.p1.name} (${r.p1.role}) + ${r.p2.name} (${r.p2.role})${r.isHard?' [קשה]':''}\n`;
   });
-
   txt+='\n=== סטטיסטיקה ===\n';
   const c={};
-  schedule.forEach(r=>{[r.p1,r.p2].forEach(p=>{c[p.name]=(c[p.name]||0)+1;});});
-  Object.entries(c).sort((a,b)=>b[1]-a[1]).forEach(([n,cnt])=>{txt+=n+': '+cnt+' משמרות\n';});
+  schedule.forEach(r=>{[r.p1,r.p2].forEach(p=>{c[p.name]=(c[p.name]||0)+1})});
+  Object.entries(c).sort((a,b)=>b[1]-a[1]).forEach(([n,v])=>{txt+=n+': '+v+'\n'});
 
   navigator.clipboard.writeText(txt).then(()=>toast('הועתק')).catch(()=>{
     const ta=document.createElement('textarea');ta.value=txt;
@@ -886,57 +797,39 @@ window.exportText = function(){
   });
 };
 
-window.clearEverything = function(){
-  if(!confirm('למחוק הכל?')) return;
-  [1,2,3].forEach(v=>{VEH[v].roster=[];});
-  schedule=[];guardHistory={};hardHistory={};recentHard.clear();logs=[];
-  [1,2,3].forEach(renderRoster);
-  renderSchedule();renderStats();renderHistory();
-  localStorage.removeItem('shaagarat_v2');
+window.clearAll = function(){
+  if(!confirm('למחוק הכל?'))return;
+  vehicles=[{id:1,name:'קוברה 1',freq:'',roster:[]},{id:2,name:'קוברה 2',freq:'',roster:[]},{id:3,name:'קוברה 3',freq:'',roster:[]}];
+  schedule=[];guardHist={};hardHourHist={};pairHist={};logs=[];
+  renderVehicles();renderMaster();renderSchedule();renderStats();renderHist();
+  localStorage.removeItem('shaagarat_v3');
   toast('נמחק');
 };
 
-function getVName(v){ return VEH[v].name||'רכב '+v; }
-
+/* ═══════════ STORAGE ═══════════ */
 function save(){
-  [1,2,3].forEach(v=>{
-    VEH[v].name=document.getElementById('vname'+v).value;
-    VEH[v].freq=document.getElementById('vfreq'+v).value;
-  });
-  localStorage.setItem('shaagarat_v2',JSON.stringify({
-    VEH,schedule,guardHistory,hardHistory,recentHard:[...recentHard],logs,uidSeq
-  }));
+  localStorage.setItem('shaagarat_v3',JSON.stringify({vehicles,schedule,guardHist,hardHourHist,pairHist,logs,uid,vid}));
 }
 
-function load(){
+function loadStorage(){
   try{
-    const raw=localStorage.getItem('shaagarat_v2');
+    const raw=localStorage.getItem('shaagarat_v3');
     if(!raw)return;
     const d=JSON.parse(raw);
-    if(d.VEH)[1,2,3].forEach(v=>{
-      VEH[v].roster=d.VEH[v]?.roster||[];
-      VEH[v].name=d.VEH[v]?.name||'';
-      VEH[v].freq=d.VEH[v]?.freq||'';
-      document.getElementById('vname'+v).value=VEH[v].name;
-      document.getElementById('vfreq'+v).value=VEH[v].freq;
-    });
+    vehicles=d.vehicles||vehicles;
     schedule=d.schedule||[];
-    guardHistory=d.guardHistory||{};
-    hardHistory=d.hardHistory||{};
-    recentHard=new Set(d.recentHard||[]);
+    guardHist=d.guardHist||{};
+    hardHourHist=d.hardHourHist||{};
+    pairHist=d.pairHist||{};
     logs=d.logs||[];
-    uidSeq=d.uidSeq||0;
-    renderSchedule();renderStats();renderHistory();
-  }catch(e){console.warn('Load err',e);}
+    uid=d.uid||100;
+    vid=d.vid||10;
+  }catch(e){console.warn('Load err',e)}
 }
 
-function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
-
-function toast(msg){
-  const el=document.getElementById('toast');
-  el.textContent=msg;el.classList.add('show');
-  setTimeout(()=>el.classList.remove('show'),2500);
-}
+/* ═══════════ UTILS ═══════════ */
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2500)}
 
 init();
 })();
