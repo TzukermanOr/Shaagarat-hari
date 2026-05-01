@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שאגרת הארי - דוח האזנות ובדיקות דם</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Rubik:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg-base: #111827;
+  --bg-surface: #1a2236;
+  --bg-card: #1f2a42;
+  --bg-card-hover: #253252;
+  --bg-input: #162032;
+  --bg-elevated: #263354;
+  --olive: #6d9b3a;
+  --olive-light: #8ec44f;
+  --olive-dark: #4a7025;
+  --gold: #d4a843;
+  --gold-dim: #a07e2e;
+  --red: #d94040;
+  --red-dim: rgba(217,64,64,0.15);
+  --blue: #4a90d9;
+  --blue-dim: rgba(74,144,217,0.12);
+  --cyan: #36b5a0;
+  --cyan-dim: rgba(54,181,160,0.12);
+  --purple: #8b6cc1;
+  --text-1: #eaedf3;
+  --text-2: #97a3bc;
+  --text-3: #5c6a84;
+  --border: #2d3a56;
+  --border-light: #384868;
+  --hard-hour-bg: rgba(217,64,64,0.08);
+  --shadow: 0 4px 24px rgba(0,0,0,0.35);
+  --shadow-sm: 0 2px 10px rgba(0,0,0,0.2);
+  --radius: 10px;
+  --radius-sm: 6px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family:'Heebo',sans-serif;
+  background:var(--bg-base);
+  color:var(--text-1);
+  min-height:100vh;
+}
+
+.header {
+  background: linear-gradient(135deg,#1a2236 0%,#151e30 100%);
+  border-bottom: 3px solid var(--olive);
+  padding: 16px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow);
+}
+
+.header-right { display:flex; align-items:center; gap:14px; }
+
+.emblem {
+  width:52px; height:52px; border-radius:50%;
+  border:2px solid var(--olive);
+  display:flex; align-items:center; justify-content:center;
+  font-size:26px; background:rgba(109,155,58,0.12);
+}
+
+.header h1 {
+  font-family:'Rubik',sans-serif; font-size:1.5rem;
+  font-weight:700; color:var(--olive-light); letter-spacing:.3px;
+}
+.header h2 { font-size:.8rem; font-weight:400; color:var(--text-2); margin-top:1px; }
+.header-meta { font-size:.75rem; color:var(--text-3); text-align:left; direction:ltr; line-height:1.5; }
+
+.app { max-width:1400px; margin:0 auto; padding:20px; }
+
+.top-controls {
+  display:grid; grid-template-columns:1fr 1fr 1fr auto;
+  gap:12px; margin-bottom:20px; align-items:end;
+}
+
+@media(max-width:900px){ .top-controls{grid-template-columns:1fr 1fr;} }
+
+.ctrl-group label {
+  display:block; font-size:.72rem; color:var(--text-2);
+  margin-bottom:4px; font-weight:500;
+}
+
+input,select,textarea {
+  width:100%; background:var(--bg-input); border:1px solid var(--border);
+  border-radius:var(--radius-sm); color:var(--text-1);
+  font-family:'Heebo',sans-serif; font-size:.82rem; padding:9px 12px;
+  transition: border-color .2s;
+}
+input:focus,select:focus,textarea:focus { outline:none; border-color:var(--olive); }
+textarea { resize:vertical; min-height:90px; line-height:1.6; }
+
+.btn {
+  display:inline-flex; align-items:center; justify-content:center; gap:6px;
+  padding:9px 18px; border:none; border-radius:var(--radius-sm);
+  font-family:'Heebo',sans-serif; font-size:.82rem; font-weight:600;
+  cursor:pointer; transition:all .2s; white-space:nowrap;
+}
+.btn-primary { background:linear-gradient(135deg,var(--olive),var(--olive-light)); color:#fff; }
+.btn-primary:hover { box-shadow:0 4px 16px rgba(109,155,58,.4); transform:translateY(-1px); }
+.btn-outline { background:transparent; border:1px solid var(--border); color:var(--text-2); }
+.btn-outline:hover { border-color:var(--olive); color:var(--text-1); }
+.btn-danger { background:var(--red-dim); color:var(--red); border:1px solid rgba(217,64,64,.25); }
+.btn-danger:hover { background:rgba(217,64,64,.25); }
+.btn-sm { padding:5px 10px; font-size:.72rem; }
+.btn-block { width:100%; }
+
+.vehicles-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:20px;
+}
+@media(max-width:900px){ .vehicles-grid{grid-template-columns:1fr;} }
+
+.vehicle-card {
+  background:var(--bg-card); border:1px solid var(--border);
+  border-radius:var(--radius); padding:16px; box-shadow:var(--shadow-sm);
+  position:relative;
+}
+
+.vehicle-card::before {
+  content:''; position:absolute; top:0; right:0; left:0; height:3px;
+  border-radius:var(--radius) var(--radius) 0 0;
+}
+.vehicle-card.v1::before { background:var(--blue); }
+.vehicle-card.v2::before { background:var(--olive-light); }
+.vehicle-card.v3::before { background:var(--gold); }
+
+.v-header {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--border);
+}
+
+.v-header h3 {
+  font-family:'Rubik',sans-serif; font-size:.92rem; font-weight:600;
+}
+.v1 .v-header h3 { color:var(--blue); }
+.v2 .v-header h3 { color:var(--olive-light); }
+.v3 .v-header h3 { color:var(--gold); }
+
+.v-header .v-count {
+  font-size:.7rem; background:var(--bg-elevated);
+  padding:2px 8px; border-radius:10px; color:var(--text-2);
+}
+
+.v-fields { display:flex; gap:8px; margin-bottom:10px; }
+.v-fields > * { flex:1; }
+.v-fields label { font-size:.68rem; }
+.v-fields input { font-size:.78rem; padding:7px 10px; }
+
+.v-names-area { margin-bottom:10px; }
+.v-names-area textarea { min-height:70px; font-size:.78rem; }
+
+.v-actions { display:flex; gap:6px; margin-bottom:10px; }
+
+.v-roster { display:flex; flex-wrap:wrap; gap:5px; min-height:28px; }
+
+.person-chip {
+  display:inline-flex; align-items:center; gap:3px;
+  padding:3px 9px; border-radius:5px; font-size:.74rem;
+  border:1px solid;
+}
+.v1 .person-chip { background:var(--blue-dim); border-color:rgba(74,144,217,.25); color:var(--blue); }
+.v2 .person-chip { background:rgba(109,155,58,.1); border-color:rgba(109,155,58,.25); color:var(--olive-light); }
+.v3 .person-chip { background:rgba(212,168,67,.1); border-color:rgba(212,168,67,.25); color:var(--gold); }
+
+.person-chip .role-tag {
+  font-size:.6rem; padding:1px 4px; border-radius:3px;
+  background:rgba(255,255,255,.06); color:var(--text-2);
+}
+
+.person-chip .x-btn {
+  cursor:pointer; opacity:.5; transition:opacity .15s; font-size:.8rem; margin-right:1px;
+}
+.person-chip .x-btn:hover { opacity:1; color:var(--red); }
+
+.tabs { display:flex; gap:4px; margin-bottom:16px; }
+.tab {
+  flex:1; padding:9px; border:1px solid var(--border); background:var(--bg-input);
+  color:var(--text-2); font-family:'Heebo',sans-serif; font-size:.78rem;
+  font-weight:500; border-radius:var(--radius-sm); cursor:pointer; text-align:center;
+  transition:all .2s;
+}
+.tab.active {
+  background:rgba(109,155,58,.15); color:var(--olive-light); border-color:var(--olive);
+}
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+
+.table-wrap {
+  overflow-x:auto; border-radius:var(--radius);
+  border:1px solid var(--border); background:var(--bg-card);
+}
+
+table { width:100%; border-collapse:collapse; font-size:.78rem; }
+
+thead th {
+  background:linear-gradient(180deg,#283050,#222b48);
+  padding:10px 8px; font-weight:600; color:var(--gold);
+  border-bottom:2px solid var(--olive); white-space:nowrap;
+  text-align:center; position:sticky; top:0; z-index:5;
+}
+
+tbody tr { border-bottom:1px solid var(--border); transition:background .15s; }
+tbody tr:hover { background:rgba(109,155,58,.04); }
+tbody tr.night { background:rgba(30,50,90,.2); }
+tbody tr.hard-hour { background:var(--hard-hour-bg); }
+
+td { padding:8px 6px; text-align:center; vertical-align:middle; }
+
+.td-hour {
+  font-family:'Rubik',sans-serif; font-weight:700; font-size:.88rem;
+  min-width:60px;
+}
+.hour-night { color:#7eb8ff; text-shadow:0 0 6px rgba(126,184,255,.25); }
+.hour-day { color:var(--olive-light); }
+.hour-hard { color:var(--red); text-shadow:0 0 8px rgba(217,64,64,.3); }
+
+.badge {
+  display:inline-block; padding:2px 9px; border-radius:4px;
+  font-size:.68rem; font-weight:600; white-space:nowrap;
+}
+.badge-listen { background:var(--blue-dim); color:var(--blue); border:1px solid rgba(74,144,217,.2); }
+.badge-blood { background:var(--red-dim); color:#ff7b7b; border:1px solid rgba(217,64,64,.2); }
+
+.cell-person {
+  display:inline-flex; align-items:center; gap:3px;
+  background:rgba(109,155,58,.08); border:1px solid rgba(109,155,58,.18);
+  padding:3px 8px; border-radius:5px; font-size:.76rem; margin:2px;
+}
+.cell-person .swap-ico {
+  cursor:pointer; font-size:.68rem; opacity:.4; transition:opacity .15s;
+}
+.cell-person .swap-ico:hover { opacity:1; }
+
+.cell-vehicle { font-weight:600; }
+.cell-vehicle.cv1 { color:var(--blue); }
+.cell-vehicle.cv2 { color:var(--olive-light); }
+.cell-vehicle.cv3 { color:var(--gold); }
+
+.cell-freq { font-family:'Rubik',sans-serif; font-weight:500; color:var(--cyan); font-size:.76rem; }
+
+.empty-state {
+  text-align:center; padding:50px 20px; color:var(--text-3);
+}
+.empty-state .icon { font-size:2.5rem; margin-bottom:10px; }
+
+.stats-section { margin-bottom:16px; }
+.stats-section h4 {
+  font-family:'Rubik',sans-serif; font-size:.85rem; font-weight:600;
+  margin-bottom:10px; padding-bottom:6px; border-bottom:1px solid var(--border);
+}
+.stats-section.sv1 h4 { color:var(--blue); }
+.stats-section.sv2 h4 { color:var(--olive-light); }
+.stats-section.sv3 h4 { color:var(--gold); }
+
+.stats-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:6px;
+}
+.stat-box {
+  background:var(--bg-input); border:1px solid var(--border);
+  border-radius:var(--radius-sm); padding:10px; text-align:center;
+}
+.stat-box .sname { font-size:.74rem; color:var(--text-2); margin-bottom:3px; }
+.stat-box .snum { font-family:'Rubik',sans-serif; font-size:1.15rem; font-weight:700; color:var(--olive-light); }
+.stat-box .sdetail { font-size:.62rem; color:var(--text-3); margin-top:2px; }
+
+.hist-card {
+  background:var(--bg-input); border:1px solid var(--border);
+  border-radius:var(--radius-sm); padding:10px 12px; margin-bottom:6px;
+  font-size:.76rem; color:var(--text-2);
+}
+.hist-card strong { color:var(--text-1); }
+
+.history-import-section {
+  background:var(--bg-card); border:1px solid var(--border);
+  border-radius:var(--radius); padding:16px; margin-bottom:20px;
+}
+.history-import-section h4 {
+  font-family:'Rubik',sans-serif; font-size:.85rem; color:var(--gold);
+  margin-bottom:10px;
+}
+
+.modal-bg {
+  display:none; position:fixed; inset:0; background:rgba(0,0,0,.6);
+  z-index:200; align-items:center; justify-content:center;
+}
+.modal-bg.open { display:flex; }
+.modal-box {
+  background:var(--bg-card); border:1px solid var(--border);
+  border-radius:12px; padding:22px; width:90%; max-width:400px;
+  box-shadow:0 12px 48px rgba(0,0,0,.5);
+}
+.modal-box h3 { font-family:'Rubik',sans-serif; color:var(--gold); margin-bottom:14px; font-size:.95rem; }
+.modal-btns { display:flex; gap:8px; margin-top:14px; }
+.modal-btns .btn { flex:1; }
+
+.toast {
+  position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(70px);
+  background:var(--olive); color:#fff; padding:10px 22px; border-radius:8px;
+  font-size:.8rem; font-weight:500; z-index:300; transition:transform .3s;
+  box-shadow:0 6px 24px rgba(0,0,0,.45);
+}
+.toast.show { transform:translateX(-50%) translateY(0); }
+
+.print-header { display:none; }
+
+@media print {
+  body { background:#fff; color:#000; font-size:11px; }
+  .header,.vehicles-grid,.tabs,.top-controls,.swap-ico,.x-btn,
+  .toast,.modal-bg,.history-import-section,.tab:not(.active),
+  .btn-actions-row { display:none!important; }
+  .app { padding:0; }
+  .tab-panel { display:block!important; }
+  #panelStats,#panelHistory { display:none!important; }
+  .print-header { display:block; text-align:center; margin-bottom:16px; border-bottom:2px solid #333; padding-bottom:10px; }
+  .print-header h1 { font-size:18px; }
+  .print-header p { font-size:11px; color:#555; }
+  .table-wrap { border:1px solid #999; }
+  table { font-size:10px; }
+  thead th { background:#ddd!important; color:#000; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  td,th { border:1px solid #bbb; }
+  .badge,.cell-person { background:transparent!important; border:1px solid #999; color:#000; }
+  .cell-vehicle,.cell-freq,.td-hour { color:#000!important; text-shadow:none!important; }
+  tbody tr.night, tbody tr.hard-hour { background:transparent!important; }
+}
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+.fade-up { animation:fadeUp .25s ease forwards; }
+
+::-webkit-scrollbar { width:5px; height:5px; }
+::-webkit-scrollbar-track { background:var(--bg-base); }
+::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-right">
+    <div class="emblem">🦁</div>
+    <div>
+      <h1>שאגרת הארי</h1>
+      <h2>דוח האזנות לקשר ובדיקות דם</h2>
+    </div>
+  </div>
+  <div class="header-meta" id="headerMeta"></div>
+</div>
+
+<div class="app">
+
+  <div class="print-header">
+    <h1>שאגרת הארי - דוח האזנות ובדיקות דם</h1>
+    <p id="printMeta"></p>
+  </div>
+
+  <div class="top-controls">
+    <div class="ctrl-group">
+      <label>משעה</label>
+      <select id="selFrom"></select>
+    </div>
+    <div class="ctrl-group">
+      <label>עד שעה</label>
+      <select id="selTo"></select>
+    </div>
+    <div class="ctrl-group">
+      <label>תאריך</label>
+      <input type="date" id="schedDate" />
+    </div>
+    <div class="ctrl-group" style="display:flex;gap:6px;align-items:end;">
+      <button class="btn btn-primary" onclick="generate()">📋 הפק לוח</button>
+      <button class="btn btn-outline" onclick="printReport()">🖨️ הדפס</button>
+      <button class="btn btn-outline" onclick="exportText()">📤 העתק</button>
+    </div>
+  </div>
+
+  <div class="vehicles-grid">
+    <div class="vehicle-card v1">
+      <div class="v-header">
+        <h3>🚙 רכב 1</h3>
+        <span class="v-count" id="vc1">0 לוחמים</span>
+      </div>
+      <div class="v-fields">
+        <div><label>שם רכב</label><input id="vname1" value="נמר 1" /></div>
+        <div><label>תדר</label><input id="vfreq1" placeholder="לדוגמה: 41.200" /></div>
+      </div>
+      <div class="v-names-area">
+        <label>הדבק שמות (שם בכל שורה, תפקיד אחרי פסיק)</label>
+        <textarea id="vtxt1" placeholder="ישראל כהן, לוחם&#10;דוד לוי, נהג"></textarea>
+      </div>
+      <div class="v-actions">
+        <button class="btn btn-outline btn-sm" onclick="loadRoster(1)">➕ טען</button>
+        <button class="btn btn-outline btn-sm" onclick="clearRoster(1)">🗑️ נקה</button>
+      </div>
+      <div class="v-roster" id="vroster1"></div>
+    </div>
+
+    <div class="vehicle-card v2">
+      <div class="v-header">
+        <h3>🚙 רכב 2</h3>
+        <span class="v-count" id="vc2">0 לוחמים</span>
+      </div>
+      <div class="v-fields">
+        <div><label>שם רכב</label><input id="vname2" value="נמר 2" /></div>
+        <div><label>תדר</label><input id="vfreq2" placeholder="לדוגמה: 42.400" /></div>
+      </div>
+      <div class="v-names-area">
+        <label>הדבק שמות (שם בכל שורה, תפקיד אחרי פסיק)</label>
+        <textarea id="vtxt2" placeholder="משה גולן, חובש&#10;אבי שלום, מפקד"></textarea>
+      </div>
+      <div class="v-actions">
+        <button class="btn btn-outline btn-sm" onclick="loadRoster(2)">➕ טען</button>
+        <button class="btn btn-outline btn-sm" onclick="clearRoster(2)">🗑️ נקה</button>
+      </div>
+      <div class="v-roster" id="vroster2"></div>
+    </div>
+
+    <div class="vehicle-card v3">
+      <div class="v-header">
+        <h3>🚙 רכב 3</h3>
+        <span class="v-count" id="vc3">0 לוחמים</span>
+      </div>
+      <div class="v-fields">
+        <div><label>שם רכב</label><input id="vname3" value="נמר 3" /></div>
+        <div><label>תדר</label><input id="vfreq3" placeholder="לדוגמה: 43.600" /></div>
+      </div>
+      <div class="v-names-area">
+        <label>הדבק שמות (שם בכל שורה, תפקיד אחרי פסיק)</label>
+        <textarea id="vtxt3" placeholder="יוסי בן דוד, מטב&#10;ניר אברהם, לוחם"></textarea>
+      </div>
+      <div class="v-actions">
+        <button class="btn btn-outline btn-sm" onclick="loadRoster(3)">➕ טען</button>
+        <button class="btn btn-outline btn-sm" onclick="clearRoster(3)">🗑️ נקה</button>
+      </div>
+      <div class="v-roster" id="vroster3"></div>
+    </div>
+  </div>
+
+  <div class="history-import-section">
+    <h4>📜 היסטוריה קודמת (לחלוקה שוויונית)</h4>
+    <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end;">
+      <div>
+        <label>שמירות קודמות (שם - מספר)</label>
+        <textarea id="histImport" style="min-height:60px;" placeholder="ישראל כהן - 3&#10;דוד לוי - 5"></textarea>
+      </div>
+      <div>
+        <label>שמרו בשעות קשות (01-05) לאחרונה</label>
+        <textarea id="hardExclude" style="min-height:60px;" placeholder="ישראל כהן&#10;דוד לוי"></textarea>
+      </div>
+      <button class="btn btn-outline" onclick="importHistory()">📥 טען</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="openTab('schedule')">📋 לוח שמירות</button>
+    <button class="tab" onclick="openTab('stats')">📊 סטטיסטיקה</button>
+    <button class="tab" onclick="openTab('history')">📜 היסטוריה</button>
+  </div>
+
+  <div class="tab-panel active" id="panelSchedule">
+    <div class="table-wrap">
+      <div id="scheduleOut">
+        <div class="empty-state"><div class="icon">📡</div><div>הגדר רכבים ולחץ "הפק לוח"</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="panelStats">
+    <div id="statsOut" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;">
+      <div class="empty-state">אין נתונים</div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="panelHistory">
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <h4 style="font-family:'Rubik',sans-serif;font-size:.85rem;color:var(--gold);">היסטוריית הפקות</h4>
+        <button class="btn btn-danger btn-sm" onclick="clearEverything()">🗑️ נקה הכל</button>
+      </div>
+      <div id="historyOut"><div class="empty-state">אין היסטוריה</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="swapModal">
+  <div class="modal-box">
+    <h3>🔄 החלפת שומר</h3>
+    <p style="font-size:.76rem;color:var(--text-2);margin-bottom:12px;" id="swapInfo"></p>
+    <div style="margin-bottom:8px;">
+      <label>בחר חלופי</label>
+      <select id="swapSelect"></select>
+    </div>
+    <div class="modal-btns">
+      <button class="btn btn-primary" onclick="confirmSwap()">אישור</button>
+      <button class="btn btn-outline" onclick="closeSwap()">ביטול</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+
+const VEH = {1:{roster:[],name:'',freq:''}, 2:{roster:[],name:'',freq:''}, 3:{roster:[],name:'',freq:''}};
+let schedule = [];
+let guardHistory = {};
+let hardHistory = {};
+let recentHard = new Set();
+let logs = [];
+let swapCtx = null;
+let uidSeq = 0;
+
+const ROLES = ['לוחם','מפקד','נהג','מאג','מטב','חובש'];
+const isHardHour = h => h >= 1 && h <= 4;
+const isNightHour = h => h >= 22 || h < 6;
+
+function init(){
+  const now = new Date();
+  document.getElementById('headerMeta').innerHTML =
+    now.toLocaleDateString('he-IL',{weekday:'long',year:'numeric',month:'long',day:'numeric'})+'<br>'+
+    now.toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'});
+
+  const f = document.getElementById('selFrom'), t = document.getElementById('selTo');
+  for(let h=0;h<24;h++){
+    const lbl = String(h).padStart(2,'0')+':00';
+    f.add(new Option(lbl,h)); t.add(new Option(lbl,h));
+  }
+  f.value=18; t.value=6;
+  document.getElementById('schedDate').valueAsDate = now;
+  load();
+  [1,2,3].forEach(renderRoster);
+}
+
+window.loadRoster = function(v){
+  const raw = document.getElementById('vtxt'+v).value.trim();
+  if(!raw) return toast('הזן שמות');
+  const lines = raw.split('\n').map(l=>l.trim()).filter(Boolean);
+  let added = 0;
+  lines.forEach(line=>{
+    const parts = line.split(',').map(s=>s.trim());
+    const name = parts[0];
+    const role = ROLES.includes(parts[1]) ? parts[1] : 'לוחם';
+    if(name && !VEH[v].roster.find(p=>p.name===name)){
+      VEH[v].roster.push({name, role, id:++uidSeq});
+      added++;
+    }
+  });
+  document.getElementById('vtxt'+v).value = '';
+  renderRoster(v);
+  save();
+  toast(added+' נוספו ל'+getVName(v));
+};
+
+window.clearRoster = function(v){
+  if(!confirm('לנקות את רשימת '+getVName(v)+'?')) return;
+  VEH[v].roster = [];
+  renderRoster(v);
+  save();
+};
+
+window.removePerson = function(v, id){
+  VEH[v].roster = VEH[v].roster.filter(p=>p.id!==id);
+  renderRoster(v);
+  save();
+};
+
+function getVName(v){ return document.getElementById('vname'+v).value || 'רכב '+v; }
+
+function renderRoster(v){
+  VEH[v].name = document.getElementById('vname'+v).value;
+  VEH[v].freq = document.getElementById('vfreq'+v).value;
+  const el = document.getElementById('vroster'+v);
+  el.innerHTML = VEH[v].roster.map(p=>`
+    <span class="person-chip">
+      <span class="x-btn" onclick="removePerson(${v},${p.id})">✕</span>
+      ${esc(p.name)} <span class="role-tag">${esc(p.role)}</span>
+    </span>`).join('');
+  document.getElementById('vc'+v).textContent = VEH[v].roster.length+' לוחמים';
+}
+
+window.importHistory = function(){
+  const raw = document.getElementById('histImport').value.trim();
+  if(raw) raw.split('\n').forEach(line=>{
+    const m = line.match(/^(.+?)\s*-\s*(\d+)/);
+    if(m) guardHistory[m[1].trim()] = parseInt(m[2]);
+  });
+  const hRaw = document.getElementById('hardExclude').value.trim();
+  recentHard = new Set();
+  if(hRaw) hRaw.split('\n').forEach(l=>{ const n=l.trim(); if(n) recentHard.add(n); });
+  save();
+  toast('היסטוריה נטענה');
+};
+
+window.generate = function(){
+  [1,2,3].forEach(v=>{
+    VEH[v].name = document.getElementById('vname'+v).value || 'רכב '+v;
+    VEH[v].freq = document.getElementById('vfreq'+v).value || '-';
+  });
+
+  const activeV = [1,2,3].filter(v=>VEH[v].roster.length>=2);
+  if(!activeV.length) return toast('נדרשים לפחות 2 אנשים ברכב אחד');
+
+  const hFrom = parseInt(document.getElementById('selFrom').value);
+  const hTo = parseInt(document.getElementById('selTo').value);
+  const dateStr = document.getElementById('schedDate').value;
+
+  let hours = [];
+  if(hFrom < hTo){
+    for(let h=hFrom;h<hTo;h++) hours.push(h);
+  } else {
+    for(let h=hFrom;h<24;h++) hours.push(h);
+    for(let h=0;h<hTo;h++) hours.push(h);
+  }
+  if(!hours.length) return toast('טווח שעות לא תקין');
+
+  // Per-vehicle tracking
+  const vUsage = {}, vCycle = {}, vHard = {};
+  activeV.forEach(v=>{
+    vUsage[v] = {}; vCycle[v] = new Set(); vHard[v] = {};
+    VEH[v].roster.forEach(p=>{
+      vUsage[v][p.name] = guardHistory[p.name] || 0;
+      vHard[v][p.name] = hardHistory[p.name] || 0;
+    });
+  });
+
+  function pick(v, hour, excluded){
+    const roster = VEH[v].roster;
+    let pool = roster.filter(p => !excluded.includes(p.name));
+    if(!pool.length) pool = roster.filter(p => !excluded.includes(p.name));
+    if(!pool.length) pool = [...roster];
+
+    let fresh = pool.filter(p => !vCycle[v].has(p.name));
+    if(!fresh.length){ vCycle[v].clear(); fresh = pool; }
+
+    const hard = isHardHour(hour);
+
+    fresh.sort((a,b) => {
+      if(hard){
+        const aR = recentHard.has(a.name)?1:0, bR = recentHard.has(b.name)?1:0;
+        if(aR!==bR) return aR-bR;
+        const aH = vHard[v][a.name]||0, bH = vHard[v][b.name]||0;
+        if(aH!==bH) return aH-bH;
+      }
+      return (vUsage[v][a.name]||0) - (vUsage[v][b.name]||0);
+    });
+
+    // Among top candidates with same score, randomize
+    const topScore = (vUsage[v][fresh[0].name]||0);
+    let candidates;
+    if(hard){
+      const topHard = vHard[v][fresh[0].name]||0;
+      const topRecent = recentHard.has(fresh[0].name);
+      candidates = fresh.filter(p =>
+        recentHard.has(p.name)===topRecent &&
+        (vHard[v][p.name]||0)===topHard &&
+        (vUsage[v][p.name]||0)===topScore
+      );
+    } else {
+      candidates = fresh.filter(p => (vUsage[v][p.name]||0)===topScore);
+    }
+    if(!candidates.length) candidates = [fresh[0]];
+
+    const chosen = candidates[Math.floor(Math.random()*candidates.length)];
+    vCycle[v].add(chosen.name);
+    vUsage[v][chosen.name] = (vUsage[v][chosen.name]||0)+1;
+    if(hard) vHard[v][chosen.name] = (vHard[v][chosen.name]||0)+1;
+    return chosen;
+  }
+
+  schedule = [];
+  let vRot = 0;
+
+  hours.forEach((hour,idx)=>{
+    const isBlood = idx%2===1;
+    const type = isBlood ? 'blood' : 'listen';
+    const typeLabel = isBlood ? 'בדיקות דם' : 'האזנות לקשר';
+
+    const vi = activeV[vRot % activeV.length];
+    vRot++;
+
+    const c1 = pick(vi, hour, []);
+    const c2 = pick(vi, hour, [c1.name]);
+
+    schedule.push({
+      hour, type, typeLabel, vehicle:vi,
+      vehicleName: VEH[vi].name, freq: VEH[vi].freq,
+      p1:{name:c1.name,role:c1.role},
+      p2:{name:c2.name,role:c2.role},
+      isNight:isNightHour(hour), isHard:isHardHour(hour), date:dateStr,
+    });
+  });
+
+  // Update globals
+  activeV.forEach(v=>{
+    VEH[v].roster.forEach(p=>{
+      guardHistory[p.name] = vUsage[v][p.name] || guardHistory[p.name] || 0;
+      hardHistory[p.name] = vHard[v][p.name] || hardHistory[p.name] || 0;
+    });
+  });
+
+  logs.unshift({
+    date: new Date().toLocaleString('he-IL'),
+    range: String(hFrom).padStart(2,'0')+':00-'+String(hTo).padStart(2,'0')+':00',
+    count: schedule.length, schedDate: dateStr,
+  });
+
+  renderSchedule(); renderStats(); renderHistory(); save();
+  openTab('schedule');
+  toast('הופק - '+schedule.length+' משמרות');
+};
+
+function renderSchedule(){
+  if(!schedule.length){
+    document.getElementById('scheduleOut').innerHTML =
+      '<div class="empty-state"><div class="icon">📡</div><div>הגדר רכבים ולחץ "הפק לוח"</div></div>';
+    return;
+  }
+
+  const vc = {1:'cv1',2:'cv2',3:'cv3'};
+  let html = `<table><thead><tr>
+    <th>שעה</th><th>סוג משימה</th><th>רכב</th><th>תדר</th><th>שומר 1</th><th>שומר 2</th>
+  </tr></thead><tbody>`;
+
+  schedule.forEach((r,i)=>{
+    const hS = String(r.hour).padStart(2,'0')+':00';
+    const hC = r.isHard?'hour-hard':(r.isNight?'hour-night':'hour-day');
+    const rC = r.isHard?'hard-hour fade-up':(r.isNight?'night fade-up':'fade-up');
+    const tC = r.type==='blood'?'badge-blood':'badge-listen';
+    const tI = r.type==='blood'?'🩸':'📡';
+
+    html += `<tr class="${rC}" style="animation-delay:${i*20}ms">
+      <td class="td-hour ${hC}">${hS}${r.isHard?' ⚠️':''}</td>
+      <td><span class="badge ${tC}">${tI} ${r.typeLabel}</span></td>
+      <td class="cell-vehicle ${vc[r.vehicle]}">${esc(r.vehicleName)}</td>
+      <td class="cell-freq">${esc(r.freq||'-')}</td>
+      <td><span class="cell-person">${esc(r.p1.name)} <span class="role-tag">${esc(r.p1.role)}</span>
+        <span class="swap-ico" onclick="openSwap(${i},1)">🔄</span></span></td>
+      <td><span class="cell-person">${esc(r.p2.name)} <span class="role-tag">${esc(r.p2.role)}</span>
+        <span class="swap-ico" onclick="openSwap(${i},2)">🔄</span></span></td>
+    </tr>`;
+  });
+
+  html += '</tbody></table>';
+  document.getElementById('scheduleOut').innerHTML = html;
+
+  if(schedule.length){
+    const d = schedule[0].date||'';
+    const rng = String(schedule[0].hour).padStart(2,'0')+':00-'+
+                String(schedule[schedule.length-1].hour).padStart(2,'0')+':00';
+    document.getElementById('printMeta').textContent = 'תאריך: '+d+' | שעות: '+rng;
+  }
+}
+
+function renderStats(){
+  if(!schedule.length){
+    document.getElementById('statsOut').innerHTML='<div class="empty-state">אין נתונים</div>';
+    return;
+  }
+  const perV={1:{},2:{},3:{}};
+  const hardC={}, nightC={};
+
+  schedule.forEach(r=>{
+    [r.p1,r.p2].forEach(p=>{
+      perV[r.vehicle][p.name]=(perV[r.vehicle][p.name]||0)+1;
+      if(r.isHard) hardC[p.name]=(hardC[p.name]||0)+1;
+      if(r.isNight) nightC[p.name]=(nightC[p.name]||0)+1;
+    });
+  });
+
+  const sC={1:'sv1',2:'sv2',3:'sv3'};
+  let html='';
+
+  [1,2,3].forEach(v=>{
+    const entries = Object.entries(perV[v]);
+    if(!entries.length) return;
+    entries.sort((a,b)=>b[1]-a[1]);
+    html += `<div class="stats-section ${sC[v]}">
+      <h4>🚙 ${esc(VEH[v].name||'רכב '+v)} | תדר: ${esc(VEH[v].freq||'-')}</h4>
+      <div class="stats-grid">${entries.map(([name,count])=>`
+        <div class="stat-box">
+          <div class="sname">${esc(name)}</div>
+          <div class="snum">${count}</div>
+          <div class="sdetail">לילה: ${nightC[name]||0} | קשות(01-05): ${hardC[name]||0}</div>
+          <div class="sdetail">סה"כ היסטורי: ${guardHistory[name]||count}</div>
+        </div>`).join('')}</div>
+    </div>`;
+  });
+
+  document.getElementById('statsOut').innerHTML = html||'<div class="empty-state">אין נתונים</div>';
+}
+
+function renderHistory(){
+  const el=document.getElementById('historyOut');
+  if(!logs.length){ el.innerHTML='<div class="empty-state">אין היסטוריה</div>'; return; }
+  el.innerHTML = logs.map(l=>`
+    <div class="hist-card">
+      <strong>${l.date}</strong> | תאריך: ${l.schedDate||'-'} | ${l.range} | ${l.count} משמרות
+    </div>`).join('');
+}
+
+window.openSwap = function(ri,slot){
+  const row = schedule[ri];
+  const cur = slot===1?row.p1.name:row.p2.name;
+  const other = slot===1?row.p2.name:row.p1.name;
+  swapCtx = {ri,slot,vi:row.vehicle,cur};
+
+  document.getElementById('swapInfo').textContent =
+    getVName(row.vehicle)+' | '+String(row.hour).padStart(2,'0')+':00 | מחליף: '+cur;
+
+  const sel = document.getElementById('swapSelect');
+  sel.innerHTML = '';
+  VEH[row.vehicle].roster.forEach(p=>{
+    if(p.name!==cur && p.name!==other) sel.add(new Option(p.name+' ('+p.role+')',p.name));
+  });
+  document.getElementById('swapModal').classList.add('open');
+};
+
+window.confirmSwap = function(){
+  if(!swapCtx) return;
+  const newName = document.getElementById('swapSelect').value;
+  const newP = VEH[swapCtx.vi].roster.find(p=>p.name===newName);
+  if(!newP) return;
+
+  const row = schedule[swapCtx.ri];
+  const oldName = swapCtx.cur;
+
+  if(swapCtx.slot===1) row.p1={name:newP.name,role:newP.role};
+  else row.p2={name:newP.name,role:newP.role};
+
+  if(guardHistory[oldName]) guardHistory[oldName]--;
+  guardHistory[newP.name]=(guardHistory[newP.name]||0)+1;
+  if(row.isHard){
+    if(hardHistory[oldName]) hardHistory[oldName]--;
+    hardHistory[newP.name]=(hardHistory[newP.name]||0)+1;
+  }
+
+  closeSwap();
+  renderSchedule(); renderStats(); save();
+  toast(oldName+' → '+newP.name);
+};
+
+window.closeSwap = function(){
+  document.getElementById('swapModal').classList.remove('open');
+  swapCtx=null;
+};
+
+window.openTab = function(tab){
+  const map={schedule:'panelSchedule',stats:'panelStats',history:'panelHistory'};
+  const keys=['schedule','stats','history'];
+  document.querySelectorAll('.tab').forEach((b,i)=> b.classList.toggle('active',keys[i]===tab));
+  Object.values(map).forEach(id=> document.getElementById(id).classList.remove('active'));
+  document.getElementById(map[tab]).classList.add('active');
+};
+
+window.printReport = function(){
+  if(!schedule.length) return toast('אין לוח');
+  window.print();
+};
+
+window.exportText = function(){
+  if(!schedule.length) return toast('אין לוח');
+  let txt='=== שאגרת הארי - דוח האזנות ובדיקות דם ===\n';
+  txt+='תאריך: '+(schedule[0].date||'')+'\n\n';
+
+  schedule.forEach(r=>{
+    const h=String(r.hour).padStart(2,'0')+':00';
+    txt+=`${h} | ${r.typeLabel} | ${r.vehicleName} | תדר: ${r.freq||'-'} | ${r.p1.name} (${r.p1.role}) + ${r.p2.name} (${r.p2.role})${r.isHard?' [שעה קשה]':''}\n`;
+  });
+
+  txt+='\n=== סטטיסטיקה ===\n';
+  const c={};
+  schedule.forEach(r=>{[r.p1,r.p2].forEach(p=>{c[p.name]=(c[p.name]||0)+1;});});
+  Object.entries(c).sort((a,b)=>b[1]-a[1]).forEach(([n,cnt])=>{txt+=n+': '+cnt+' משמרות\n';});
+
+  navigator.clipboard.writeText(txt).then(()=>toast('הועתק')).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=txt;
+    document.body.appendChild(ta);ta.select();document.execCommand('copy');
+    document.body.removeChild(ta);toast('הועתק');
+  });
+};
+
+window.clearEverything = function(){
+  if(!confirm('למחוק הכל?')) return;
+  [1,2,3].forEach(v=>{VEH[v].roster=[];});
+  schedule=[];guardHistory={};hardHistory={};recentHard.clear();logs=[];
+  [1,2,3].forEach(renderRoster);
+  renderSchedule();renderStats();renderHistory();
+  localStorage.removeItem('shaagarat_v2');
+  toast('נמחק');
+};
+
+function getVName(v){ return VEH[v].name||'רכב '+v; }
+
+function save(){
+  [1,2,3].forEach(v=>{
+    VEH[v].name=document.getElementById('vname'+v).value;
+    VEH[v].freq=document.getElementById('vfreq'+v).value;
+  });
+  localStorage.setItem('shaagarat_v2',JSON.stringify({
+    VEH,schedule,guardHistory,hardHistory,recentHard:[...recentHard],logs,uidSeq
+  }));
+}
+
+function load(){
+  try{
+    const raw=localStorage.getItem('shaagarat_v2');
+    if(!raw)return;
+    const d=JSON.parse(raw);
+    if(d.VEH)[1,2,3].forEach(v=>{
+      VEH[v].roster=d.VEH[v]?.roster||[];
+      VEH[v].name=d.VEH[v]?.name||'';
+      VEH[v].freq=d.VEH[v]?.freq||'';
+      document.getElementById('vname'+v).value=VEH[v].name;
+      document.getElementById('vfreq'+v).value=VEH[v].freq;
+    });
+    schedule=d.schedule||[];
+    guardHistory=d.guardHistory||{};
+    hardHistory=d.hardHistory||{};
+    recentHard=new Set(d.recentHard||[]);
+    logs=d.logs||[];
+    uidSeq=d.uidSeq||0;
+    renderSchedule();renderStats();renderHistory();
+  }catch(e){console.warn('Load err',e);}
+}
+
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+
+function toast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg;el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),2500);
+}
+
+init();
+})();
+</script>
+</body>
+</html>
